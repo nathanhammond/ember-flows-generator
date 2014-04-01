@@ -1,8 +1,24 @@
 @import 'normalize';
 
-/* Put your CSS here */
-@keyframes domChanged { from { background: yellow; } }
-@-webkit-keyframes domChanged { from { background: yellow; } }
-.ember-view { animation: domChanged 1s; -webkit-animation: domChanged 1s; }
+$font-family: Helvetica, Arial, sans-serif;
+$color: #faf2ee;
 
-header {  }
+* { box-sizing: border-box; }
+
+header { height: 40px; background: #e1563f url('../img/navigation_background_x2.png') center top repeat-x; background-size: 320px 40px; border-bottom: 1px solid #aa412f; box-shadow: rgba(0,0,0,0.3) 0 0 2px; }
+header h1 { float: left; margin: 0 13px; font-size: 26px; line-height: 40px; font-family: $font-family; font-weight: normal; color: $color; text-shadow: rgba(0,0,0,0.3) 0px 1px 0px; }
+
+header button { float: right; display: block; height: 26px; line-height: 26px; margin: 7px 13px; padding: 0 .5em; background-color: rgba(0,0,0,.17); border: 1px solid #a93926; border-radius: 4px; box-shadow: inset rgba(255,255,255,0.17) 0 1px 1px; font-family: $font-family; font-size: 13px; color: $color; text-shadow: rgba(0,0,0,0.3) 0px 1px 0px; }
+
+header button:hover { background-color: rgba(0,0,0,.3); }
+
+main { display: flex; flex-direction: row; height: 500px; }
+main > .state { width: 20%; }
+main > .router { width: 20%; }
+
+main > .workspace { width: 60%; border-right: 1px solid #aa412f; border-left: 1px solid #aa412f; }
+
+.workspace { display: flexbox; flex-direction: column; }
+
+.workspace .canvas { height: 80%; border-bottom: 1px solid #aa412f; }
+.workspace .details { height: 20%; }
