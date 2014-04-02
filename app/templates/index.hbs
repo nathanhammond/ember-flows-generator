@@ -1,18 +1,60 @@
-<div class="state">
-  <h2>State</h2>
-  <textarea></textarea>
-</div>
+<section {{bind-attr class=":state stateFlipped:flipped"}}>
+  <header>
+    <h1>STATE</h1>
+    <div class="card">
+      <button class="side front" {{action "flipState"}}>CALC</button>
+      <button class="side back" {{action "flipState"}}>CODE</button>
+    </div>
+  </header>
+  <div class="card">
+    <div class="side front">
+      <dl>
+        <dt>isIdentified</dt>
+          <dd>true</dd>
+      </dl>
+    </div>
+    <div class="side back">
+      <textarea></textarea>
+    </div>
+  </div>
+</section>
 
 <div class="workspace">
-  <div class="canvas">
-    <h2>Diagram</h2>
-  </div>
-  <div class="details">
-    <h2>Details</h2>
-  </div>
+  <section class="canvas">
+    <header>
+      <h1>Diagram</h1>
+    </header>
+  </section>
+  <section class="details">
+    <header>
+      <h1>Details</h1>
+    </header>
+    <label for="entry-node">{{input type="checkbox" id="entry-node" name="entry-node" checked=entryNode}} Entry Node</label>
+  </section>
+  <section class="stepper">
+    <header>
+      <h1>Stepper</h1>
+    </header>
+    <button>PLAY</button>
+  </section>
 </div>
 
-<div class="router">
-  <h2>Routes</h2>
-  <textarea></textarea>
-</div>
+<section {{bind-attr class=":router routerFlipped:flipped"}}>
+  <header>
+    <h1>ROUTER</h1>
+    <div class="card">
+      <button class="side front" {{action "flipRouter"}}>NODES</button>
+      <button class="side back" {{action "flipRouter"}}>CODE</button>
+    </div>
+  </header>
+  <div class="card">
+    <div class="side front">
+      <div class="node">routeName1</div>
+      <div class="node">routeName2</div>
+      <div class="node">routeName3</div>
+    </div>
+    <div class="side back">
+      <textarea></textarea>
+    </div>
+  </div>
+</section>

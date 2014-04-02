@@ -1,24 +1,69 @@
 @import 'normalize';
 
 $font-family: Helvetica, Arial, sans-serif;
-$color: #faf2ee;
+$color: #FAF2EE;
+$background: #FAF4F1;
+$sectionheader: #F9E7E4;
+$sectionbutton: #F2D1CB;
 
 * { box-sizing: border-box; }
 
-header { height: 40px; background: #e1563f url('../img/navigation_background_x2.png') center top repeat-x; background-size: 320px 40px; border-bottom: 1px solid #aa412f; box-shadow: rgba(0,0,0,0.3) 0 0 2px; }
-header h1 { float: left; margin: 0 13px; font-size: 26px; line-height: 40px; font-family: $font-family; font-weight: normal; color: $color; text-shadow: rgba(0,0,0,0.3) 0px 1px 0px; }
+body { background-color: $background; }
 
-header button { float: right; display: block; height: 26px; line-height: 26px; margin: 7px 13px; padding: 0 .5em; background-color: rgba(0,0,0,.17); border: 1px solid #a93926; border-radius: 4px; box-shadow: inset rgba(255,255,255,0.17) 0 1px 1px; font-family: $font-family; font-size: 13px; color: $color; text-shadow: rgba(0,0,0,0.3) 0px 1px 0px; }
+/* Flip handling. */
+.card { transform-style: preserve-3d; transition: transform 0.2s; }
+.card .side { position: absolute; width: 100%; backface-visibility: hidden; }
+.card .back { transform: rotateY(180deg); }
+.flipped .card { transform: rotateY(180deg); }
 
-header button:hover { background-color: rgba(0,0,0,.3); }
+/* Two types of cards, div cards are big, button cards are the control to the big cards. */
+.card div.side { height: 100%; }
+.card div.back { background: $sectionbutton; }
+.card button { overflow: hidden; }
 
-main { display: flex; flex-direction: row; height: 500px; }
+/* This is the mostly decorative header. */
+header.main { height: 40px; padding: 0 13px; background: #e1563f url('../img/navigation_background_x2.png') center top repeat-x; background-size: 320px 40px; border-bottom: 1px solid #aa412f; box-shadow: rgba(0,0,0,0.3) 0 0 2px; }
+header.main {
+  h1 { float: left; margin: 0; font-size: 26px; line-height: 40px; font-family: $font-family; font-weight: normal; color: $color; text-shadow: rgba(0,0,0,0.3) 0px 1px 0px; }
+
+  .buttons { float: right; }
+  button { display: inline-block; height: 26px; line-height: 26px; margin: 7px 0; padding: 0 .5em; background-color: rgba(0,0,0,.17); border: 1px solid #a93926; border-radius: 4px; box-shadow: inset rgba(255,255,255,0.17) 0 1px 1px; font-family: $font-family; font-size: 13px; color: $color; text-shadow: rgba(0,0,0,0.3) 0px 1px 0px; }
+  button:hover { background-color: rgba(0,0,0,.3); }
+  button + button { margin-left: 6.5px; }
+}
+
+/* Each pane also gets a header. */
+section > header { min-height: 20px; height: 20px; max-height: 20px; padding: 0 0 0 6.5px; background-color: $sectionheader; }
+section > header {
+  h1 { float: left; height: 20px; margin: 0; font-size: 10px; line-height: 20px; text-transform: uppercase; }
+  button { height: 20px; margin: 0; padding: 0; border: none; font-size: 10px; line-height: 20px; background-color: $sectionbutton; box-shadow: inset rgba(0,0,0,0.17) 0 1px 1px; }
+
+  .card { float: right; width: 40px; }
+}
+
+/* Flexbox layout. */
+main { height: 400px; display: flex; flex-direction: row; }
 main > .state { width: 20%; }
 main > .router { width: 20%; }
-
 main > .workspace { width: 60%; border-right: 1px solid #aa412f; border-left: 1px solid #aa412f; }
 
-.workspace { display: flexbox; flex-direction: column; }
+/* The state and router sections are also flexboxes. */
+.state { display: flex; flex-direction: column; }
+.router { display: flex; flex-direction: column; }
+.workspace { display: flex; flex-direction: column; }
 
-.workspace .canvas { height: 80%; border-bottom: 1px solid #aa412f; }
-.workspace .details { height: 20%; }
+/* Crazy! the workspace is *also* a flexbox. */
+.workspace .stepper { height: 10%; }
+.workspace .canvas { height: 60%; }
+.workspace .details { height: 30%; }
+
+.workspace section + section { border-top: 1px solid #aa412f; }
+
+/* If the section is a card, set its height. */
+.state > .card { height: 100%; }
+.router > .card { height: 100%; }
+
+.router .node { float: left; height: 20px; font-size: 10px; line-height: 20px;  border: 1px solid black; border-radius: 20px; text-align: center; }
+
+
+
