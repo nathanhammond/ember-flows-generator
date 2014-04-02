@@ -53,6 +53,9 @@ header.main {
   button + button { margin-left: 6.5px; }
 }
 
+/* Each pane */
+section { min-height: 20px; }
+
 /* Each pane also gets a header. */
 section > header { min-height: 20px; height: 20px; max-height: 20px; padding: 0 0 0 6.5px; background-color: $sectionheader; }
 section > header {
@@ -69,10 +72,8 @@ main > .state { width: 20%; }
 main > .router { width: 20%; }
 main > .workspace { width: 60%; border-right: 1px solid #aa412f; border-left: 1px solid #aa412f; }
 
-/* The state and router sections are also flexboxes. */
-.state { display: flex; flex-direction: column; }
-.router { display: flex; flex-direction: column; }
-.workspace { display: flex; flex-direction: column; }
+/* The state, router, and workspace sections are also flexboxes. */
+.state, .router, .workspace { display: flex; flex-direction: column; }
 
 /* Crazy! the workspace is *also* a flexbox. */
 .workspace .stepper { height: 10%; }
