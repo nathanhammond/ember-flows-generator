@@ -73,7 +73,7 @@ main > .router { width: 20%; }
 main > .workspace { width: 60%; border-right: 1px solid #aa412f; border-left: 1px solid #aa412f; }
 
 /* The state, router, and workspace sections are also flexboxes. */
-.state, .router, .workspace { display: flex; flex-direction: column; }
+.state, .router, .workspace { display: flex; flex-direction: column; height: 100%; }
 
 /* Crazy! the workspace is *also* a flexbox. */
 .workspace .stepper { height: 10%; }
