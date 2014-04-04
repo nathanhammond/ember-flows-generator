@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>App</title>
-    <meta name='description' content=''>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>EmberFlowsGenerator Tests</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel='stylesheet' href='/assets/app.css'>
-    <link rel="stylesheet" href='/assets/qunit.css'>
+    <script>
+      ENV = {{ENV}};
+      document.write('<base href="' + document.location.origin + ENV.rootURL + '" />');
+    </script>
 
-    <script src='/assets/app.js'></script>
+    <link rel="stylesheet" href="assets/app.css">
+    <link rel="stylesheet" href="assets/qunit.css">
+
+    <script src="assets/app.js"></script>
+    <script src="assets/tests.js"></script>
 
     <style>
       #ember-testing-container {
@@ -23,8 +29,8 @@
         overflow: auto;
         z-index: 9999;
         border: 1px solid #ccc;
-        }
-        #ember-testing {
+      }
+      #ember-testing {
         zoom: 50%;
       }
     </style>

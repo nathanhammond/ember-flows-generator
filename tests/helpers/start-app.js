@@ -1,5 +1,4 @@
-import Application from 'ember-flows-generator/app';
-import Router from 'ember-flows-generator/router';
+var Router = require('ember-flows-generator/router')['default'];
 
 function startApp(attrs) {
   var App;
@@ -16,7 +15,7 @@ function startApp(attrs) {
   });
 
   Ember.run(function(){
-    App = Application.create(attributes);
+    App = require('ember-flows-generator/main')['default']('ember-flows-generator', attributes);
     App.setupForTesting();
     App.injectTestHelpers();
   });
