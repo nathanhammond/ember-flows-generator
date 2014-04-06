@@ -5,8 +5,7 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     var textarea = this.$('textarea')[0];
     var editor = CodeMirror.fromTextArea(textarea, {
-      mode: "text/javascript",
-      lineNumbers: true
+      mode: "text/javascript"
     });
 
     this.set('editor', editor);
