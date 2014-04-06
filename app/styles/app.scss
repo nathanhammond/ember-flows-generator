@@ -93,3 +93,4 @@ main > .workspace { width: 60%; border-right: 1px solid #aa412f; border-left: 1p
 .router .node { float: left; height: 20px; font-size: 10px; line-height: 20px;  border: 1px solid black; border-radius: 20px; text-align: center; }
 
 @import 'components/code-editor';
+@import 'codemirror';
