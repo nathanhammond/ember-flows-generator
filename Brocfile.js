@@ -4,6 +4,8 @@ var uglifyJavaScript = require('broccoli-uglify-js');
 var replace = require('broccoli-replace');
 var compileES6 = require('broccoli-es6-concatenator');
 var pickFiles = require('broccoli-static-compiler');
+var mergeTrees = require('broccoli-merge-trees');
+
 var env = require('broccoli-env').getEnv();
 var getEnvJSON = require('./config/environment');
 
@@ -27,7 +29,7 @@ module.exports = function (broccoli) {
 
   indexHTML = replace(indexHTML, {
     files: ['index.html'],
-    patterns: [{ match: /\{\{ENV\}\}/g, replacement: getEnvJSON.bind(env)}]
+    patterns: [{ match: /\{\{ENV\}\}/g, replacement: getEnvJSON.bind(null, env)}]
   });
 
   // sourceTrees, appAndDependencies for CSS and JavaScript
@@ -46,7 +48,7 @@ module.exports = function (broccoli) {
   });
 
   var sourceTrees = [app, config, 'vendor'].concat(broccoli.bowerTrees());
-  var appAndDependencies = new broccoli.MergedTree(sourceTrees);
+  var appAndDependencies = mergeTrees(sourceTrees, { overwrite: true });
 
   // JavaScript
 
@@ -87,7 +89,7 @@ module.exports = function (broccoli) {
 
   // Styles
 
-  var styles = preprocessCss(sourceTrees, prefix + '/styles', '/assets');
+  var styles = preprocessCss(appAndDependencies, prefix + '/styles', '/assets');
 
   // Ouput
 
@@ -121,13 +123,13 @@ module.exports = function (broccoli) {
 
     testsIndexHTML = replace(testsIndexHTML, {
       files: ['tests/index.html'],
-      patterns: [{ match: /\{\{ENV\}\}/g, replacement: getEnvJSON.bind(env)}]
+      patterns: [{ match: /\{\{ENV\}\}/g, replacement: getEnvJSON.bind(null, env)}]
     });
 
     tests = preprocessTemplates(tests);
 
     sourceTrees = [tests, 'vendor'].concat(broccoli.bowerTrees());
-    appAndDependencies = new broccoli.MergedTree(sourceTrees);
+    appAndDependencies = mergeTrees(sourceTrees, { overwrite: true });
 
     var testsJs = preprocessJs(appAndDependencies, '/', prefix);
 
@@ -160,5 +162,5 @@ module.exports = function (broccoli) {
     outputTrees = outputTrees.concat(testsTrees);
   }
 
-  return outputTrees;
+  return mergeTrees(outputTrees, { overwrite: true });
 };
