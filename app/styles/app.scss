@@ -69,9 +69,24 @@ section > header {
 }
 
 /* Flexbox layout. */
-.application { display: flex; flex-direction: column; height: 100%; }
+.application {
+  display: -webkit-flex;
+  -webkit-flex-direction: column;
+
+  display: flex;
+  flex-direction: column;
+}
+.application { height: 100%; }
 header.main { min-height: 40px; max-height: 40px; }
-main { height: 100%; display: flex; flex-direction: row; }
+
+main {
+  display: -webkit-flex;
+  -webkit-flex-direction: row;
+
+  display: flex;
+  flex-direction: row;
+}
+main { height: 100%; }
 main > .state { width: 20%; }
 main > .router { width: 20%; }
 main > .workspace { width: 60%; border-right: 1px solid #aa412f; border-left: 1px solid #aa412f; }
@@ -81,7 +96,14 @@ main > .workspace { width: 60%; border-right: 1px solid #aa412f; border-left: 1p
 }
 
 /* The state, router, and workspace sections are also flexboxes. */
-.state, .router, .workspace { display: flex; flex-direction: column; height: 100%; @include webkitcalc(height, "100% - 40px"); }
+.state, .router, .workspace {
+  display: -webkit-flex;
+  -webkit-flex-direction: column;
+
+  display: flex;
+  flex-direction: column;
+}
+.state, .router, .workspace { height: 100%; @include webkitcalc(height, "100% - 40px"); }
 
 /* Crazy! the workspace is *also* a flexbox. */
 .workspace .stepper { height: 10%; }
