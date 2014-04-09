@@ -76,8 +76,12 @@ main > .state { width: 20%; }
 main > .router { width: 20%; }
 main > .workspace { width: 60%; border-right: 1px solid #aa412f; border-left: 1px solid #aa412f; }
 
+@mixin webkitcalc($property, $expression) {
+  #{$property}: -webkit-calc(#{$expression});
+}
+
 /* The state, router, and workspace sections are also flexboxes. */
-.state, .router, .workspace { display: flex; flex-direction: column; height: 100%; }
+.state, .router, .workspace { display: flex; flex-direction: column; height: 100%; @include webkitcalc(height, "100% - 40px"); }
 
 /* Crazy! the workspace is *also* a flexbox. */
 .workspace .stepper { height: 10%; }
