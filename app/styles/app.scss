@@ -91,6 +91,7 @@ main > .state { width: 20%; }
 main > .router { width: 20%; }
 main > .workspace { width: 60%; border-right: 1px solid #aa412f; border-left: 1px solid #aa412f; }
 
+/* Workaround for libsass bug. */
 @mixin webkitcalc($property, $expression) {
   #{$property}: -webkit-calc(#{$expression});
 }
@@ -121,8 +122,6 @@ main > .workspace { width: 60%; border-right: 1px solid #aa412f; border-left: 1p
   textarea { width: 100%; height: 100%; display: block; }
 }
 
-
 .router .node { float: left; height: 20px; font-size: 10px; line-height: 20px;  border: 1px solid black; border-radius: 20px; text-align: center; }
 
-@import 'components/code-editor';
-@import 'codemirror';
+@import 'components/code-editor/code-editor';
