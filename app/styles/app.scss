@@ -131,7 +131,7 @@ main > .resize { position: absolute; width: 8px; margin: 0 -4px; height: calc(10
 main > .resize {
   background: {
     image: linear-gradient(to bottom, $bordercolor 50%, $bordercolor 50%);
-    size: 1px 5px;
+    size: 1px 7px;
     position: center top;
     repeat: repeat-y;
   }
@@ -146,7 +146,7 @@ main > .resize:hover, main > .resize.active {
 .workspace > .resize {
   background: {
     image: linear-gradient(to right, $bordercolor 50%, $bordercolor 50%);
-    size: 5px 1px;
+    size: 7px 1px;
     position: center center;
     repeat: repeat-x;
   }
