@@ -1,9 +1,9 @@
 export default Ember.View.extend({
   classNames: ['application'],
-  classNameBindings: ['resizing', 'resizingDirection'],
+  classNameBindings: ['resizing', 'resizingDimension'],
 
   resizing: false,
-  resizingDirection: undefined,
+  resizingDimension: undefined,
   resizingElem: undefined,
 
   mouseDown: function(e) {
@@ -12,7 +12,7 @@ export default Ember.View.extend({
       e.target.classList.add('active');
 
       this.set('resizing', true);
-      this.set('resizingDirection', e.target.parentNode.classList.contains('workspace') ? 'row' : 'column');
+      this.set('resizingDimension', e.target.parentNode.classList.contains('workspace') ? 'height' : 'width');
       this.set('resizingElem', e.target);
     }
   },
@@ -20,13 +20,13 @@ export default Ember.View.extend({
     if (this.get('resizing')) {
       e.preventDefault();
 
-      var dimension, measure, cursor;
-      if (this.get('resizingDirection') == 'column') {
-        dimension = "width";
+      var dimension = this.get('resizingDimension'),
+          measure, cursor;
+
+      if (dimension == 'width') {
         measure = "right";
         cursor = e.pageX;
       } else {
-        dimension = "height";
         measure = "bottom";
         cursor = e.pageY;
       }
@@ -46,12 +46,29 @@ export default Ember.View.extend({
     }
   },
   mouseUp: function(e) {
-    var elem = this.get('resizingElem');
-    if (elem) {
+    if (this.get('resizing')) {
+      var elem = this.get('resizingElem');
+
+      var dimension = this.get('resizingDimension');
+
+      var sections = [].slice.call(elem.parentNode.childNodes).filter(function(element) {
+        return element.nodeType === Node.ELEMENT_NODE && element.tagName.toLowerCase() === 'section';
+      });
+      var dimensions = [];
+
+      sections.forEach(function(section) {
+        dimensions.push(section.getBoundingClientRect()[dimension]);
+      });
+      sections.forEach(function(section, index) {
+        section.style[dimension] = dimensions[index] + 'px';
+      });
+
       elem.classList.remove('active');
+      this.set('resizing', false);
+      this.set('resizingDimension', undefined);
+      this.set('resizingElem', undefined);
     }
-    this.set('resizing', false);
-    this.set('resizingDirection', undefined);
-    this.set('resizingElem', undefined);
+
+    // FIXME: Recalculate on window resize.
   }
 });

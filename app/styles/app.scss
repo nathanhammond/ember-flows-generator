@@ -160,7 +160,7 @@ main > .resize:hover, main > .resize.active {
   background-image: linear-gradient(to right, $bordercolor 50%, transparent 50%);
 }
 
-.resizing.column * { cursor: ew-resize; }
-.resizing.row * { cursor: ns-resize; }
+.resizing.width * { cursor: ew-resize; }
+.resizing.height * { cursor: ns-resize; }
 
 @import 'components/code-editor/code-editor';
