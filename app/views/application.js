@@ -59,8 +59,15 @@ export default Ember.View.extend({
       sections.forEach(function(section) {
         dimensions.push(section.getBoundingClientRect()[dimension]);
       });
+      var sum = dimensions.reduce(function(a, b) { return a + b; });
+      var cumulative = 0;
       sections.forEach(function(section, index) {
-        section.style[dimension] = dimensions[index] + 'px';
+        if (index === dimensions.length - 1) {
+          section.style[dimension] = (100 - cumulative) + '%';
+        } else {
+          cumulative += dimensions[index]/sum*100;
+          section.style[dimension] = (dimensions[index]/sum*100) + '%';
+        }
       });
 
       elem.classList.remove('active');
@@ -68,7 +75,5 @@ export default Ember.View.extend({
       this.set('resizingDimension', undefined);
       this.set('resizingElem', undefined);
     }
-
-    // FIXME: Recalculate on window resize.
   }
 });
