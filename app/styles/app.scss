@@ -10,7 +10,7 @@ $sectionbutton: #F2D1CB;
 
 body { background-color: $background; }
 
-html, body { height: 100%; }
+html, body { height: 100%; overflow: hidden; }
 
 /* Card positioning. */
 .card { position: relative; }
@@ -87,9 +87,9 @@ main {
   flex-direction: row;
 }
 main { height: 100%; }
-main > .state { width: 20%; }
-main > .router { width: 20%; }
-main > .workspace { width: 60%; border-right: 1px solid #aa412f; border-left: 1px solid #aa412f; }
+main > .state { width: 20%; min-width: 100px; }
+main > .router { width: 20%; min-width: 100px; }
+main > .workspace { width: 60%; border-right: 1px solid #aa412f; border-left: 1px solid #aa412f; min-width: 160px; }
 
 /* Workaround for libsass bug. */
 @mixin webkitcalc($property, $expression) {
@@ -111,7 +111,7 @@ main > .workspace { width: 60%; border-right: 1px solid #aa412f; border-left: 1p
 .workspace .canvas { height: 60%; }
 .workspace .details { height: 30%; }
 
-.workspace section + section { border-top: 1px solid #aa412f; }
+.workspace section ~ section { border-top: 1px solid #aa412f; }
 
 /* If the section is a card, set its height. */
 .state > .card,
@@ -123,5 +123,10 @@ main > .workspace { width: 60%; border-right: 1px solid #aa412f; border-left: 1p
 }
 
 .router .node { float: left; height: 20px; font-size: 10px; line-height: 20px;  border: 1px solid black; border-radius: 20px; text-align: center; }
+
+/* Blocks to serve as resize handles. */
+.resize { background: rgba(255,0,0,.2); }
+main > .resize { position: absolute; width: 8px; margin: 0 -4px; height: calc(100% - 40px); cursor: ew-resize; }
+.workspace > .resize { position: static; z-index: 10000; height: 8px; margin: -4px 0; cursor: ns-resize; }
 
 @import 'components/code-editor/code-editor';

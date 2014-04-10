@@ -19,25 +19,35 @@
   </div>
 </section>
 
-<div class="workspace">
+<div class="resize"></div>
+
+<section class="workspace">
   <section class="canvas">
     <header>
       <h1>Diagram</h1>
     </header>
   </section>
+
+  <div class="resize"></div>
+
   <section class="details">
     <header>
       <h1>Details</h1>
     </header>
     <label for="entry-node">{{input type="checkbox" id="entry-node" name="entry-node" checked=entryNode}} Entry Node</label>
   </section>
+
+  <div class="resize"></div>
+
   <section class="stepper">
     <header>
       <h1>Stepper</h1>
     </header>
     <button>PLAY</button>
   </section>
-</div>
+</section>
+
+<div class="resize"></div>
 
 <section {{bind-attr class=":router routerFlipped:flipped"}}>
   <header>
