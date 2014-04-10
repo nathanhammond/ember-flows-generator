@@ -46,7 +46,10 @@ export default Ember.View.extend({
     }
   },
   mouseUp: function(e) {
-    this.get('resizingElem').classList.remove('active');
+    var elem = this.get('resizingElem');
+    if (elem) {
+      elem.classList.remove('active');
+    }
     this.set('resizing', false);
     this.set('resizingDirection', undefined);
     this.set('resizingElem', undefined);
