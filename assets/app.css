@@ -330,21 +330,23 @@ html, body {
   overflow: hidden; }
 
 /* Card positioning. */
-.card {
-  position: relative; }
 
 .card .side {
   position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   width: 100%; }
+
+.card .back {
+  background-color: #F2D1CB; }
 
 /* Two types of cards, div cards are big, button cards are the control to the big cards. */
 .card div.side {
-  height: 100%; }
+  overflow: auto; }
 
-.card div.back {
-  background: #F2D1CB; }
-
-.card button {
+.card button.side {
   overflow: hidden; }
 
 /* Transitions */
@@ -407,6 +409,7 @@ header.main button + button {
 
 /* Each pane */
 section {
+  position: relative;
   min-height: 20px; }
 
 /* Each pane also gets a header. */
@@ -436,6 +439,16 @@ section > header button {
 section > header .card {
   float: right;
   width: 40px; }
+
+section .body {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto; }
+section .body.card {
+  overflow: visible; }
 
 /* Flexbox layout. */
 .application {
@@ -549,10 +562,10 @@ main > .resize:hover, main > .resize.active {
 .workspace > .resize:hover, .workspace > .resize.active {
   background-image: linear-gradient(to right, #AA412F 50%, transparent 50%); }
 
-.resizing.column * {
+.resizing.width * {
   cursor: ew-resize; }
 
-.resizing.row * {
+.resizing.height * {
   cursor: ns-resize; }
 
 .code-editor {
