@@ -129,4 +129,7 @@ main > .workspace { width: 60%; border-right: 1px solid #aa412f; border-left: 1p
 main > .resize { position: absolute; width: 8px; margin: 0 -4px; height: calc(100% - 40px); cursor: ew-resize; }
 .workspace > .resize { position: static; z-index: 10000; height: 8px; margin: -4px 0; cursor: ns-resize; }
 
+.resizing.column * { cursor: ew-resize; }
+.resizing.row * { cursor: ns-resize; }
+
 @import 'components/code-editor/code-editor';

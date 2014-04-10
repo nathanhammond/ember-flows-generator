@@ -1,5 +1,6 @@
 export default Ember.View.extend({
   classNames: ['application'],
+  classNameBindings: ['resizing', 'resizingDirection'],
 
   resizing: false,
   resizingDirection: undefined,
@@ -44,5 +45,7 @@ export default Ember.View.extend({
   },
   mouseUp: function(e) {
     this.set('resizing', false);
+    this.set('resizingDirection', undefined);
+    this.set('resizingElem', undefined);
   }
 });
