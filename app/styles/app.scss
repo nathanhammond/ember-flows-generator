@@ -5,6 +5,7 @@ $color: #FAF2EE;
 $background: #FAF4F1;
 $sectionheader: #F9E7E4;
 $sectionbutton: #F2D1CB;
+$bordercolor: #AA412F;
 
 * { box-sizing: border-box; }
 
@@ -89,7 +90,7 @@ main {
 main { height: 100%; }
 main > .state { width: 20%; min-width: 100px; }
 main > .router { width: 20%; min-width: 100px; }
-main > .workspace { width: 60%; border-right: 1px solid #aa412f; border-left: 1px solid #aa412f; min-width: 160px; }
+main > .workspace { width: 60%; min-width: 160px; }
 
 /* Workaround for libsass bug. */
 @mixin webkitcalc($property, $expression) {
@@ -111,8 +112,6 @@ main > .workspace { width: 60%; border-right: 1px solid #aa412f; border-left: 1p
 .workspace .canvas { height: 60%; }
 .workspace .details { height: 30%; }
 
-.workspace section ~ section { border-top: 1px solid #aa412f; }
-
 /* If the section is a card, set its height. */
 .state > .card,
 .router > .card { height: 100%; }
@@ -125,9 +124,36 @@ main > .workspace { width: 60%; border-right: 1px solid #aa412f; border-left: 1p
 .router .node { float: left; height: 20px; font-size: 10px; line-height: 20px;  border: 1px solid black; border-radius: 20px; text-align: center; }
 
 /* Blocks to serve as resize handles. */
-.resize { background: rgba(255,0,0,.2); }
+.resize { z-index: 100; }
 main > .resize { position: absolute; width: 8px; margin: 0 -4px; height: calc(100% - 40px); cursor: ew-resize; }
-.workspace > .resize { position: static; z-index: 10000; height: 8px; margin: -4px 0; cursor: ns-resize; }
+
+/* Fake border that doesn't take up horizontal space. */
+main > .resize {
+  background: {
+    image: linear-gradient(to bottom, $bordercolor 50%, $bordercolor 50%);
+    size: 1px 5px;
+    position: center top;
+    repeat: repeat-y;
+  }
+}
+main > .resize:hover, main > .resize.active {
+  background-image: linear-gradient(to bottom, $bordercolor 50%, transparent 50%);
+}
+
+.workspace > .resize { position: static; height: 8px; margin: -4px 0; cursor: ns-resize; }
+
+/* Fake border that doesn't take up horizontal space. */
+.workspace > .resize {
+  background: {
+    image: linear-gradient(to right, $bordercolor 50%, $bordercolor 50%);
+    size: 5px 1px;
+    position: center center;
+    repeat: repeat-x;
+  }
+}
+.workspace > .resize:hover, .workspace > .resize.active {
+  background-image: linear-gradient(to right, $bordercolor 50%, transparent 50%);
+}
 
 .resizing.column * { cursor: ew-resize; }
 .resizing.row * { cursor: ns-resize; }

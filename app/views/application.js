@@ -9,6 +9,8 @@ export default Ember.View.extend({
   mouseDown: function(e) {
     if (e.target.classList.contains('resize')) {
       e.preventDefault();
+      e.target.classList.add('active');
+
       this.set('resizing', true);
       this.set('resizingDirection', e.target.parentNode.classList.contains('workspace') ? 'row' : 'column');
       this.set('resizingElem', e.target);
@@ -44,6 +46,7 @@ export default Ember.View.extend({
     }
   },
   mouseUp: function(e) {
+    this.get('resizingElem').classList.remove('active');
     this.set('resizing', false);
     this.set('resizingDirection', undefined);
     this.set('resizingElem', undefined);
