@@ -14,13 +14,13 @@ body { background-color: $background; }
 html, body { height: 100%; overflow: hidden; }
 
 /* Card positioning. */
-.card { position: relative; }
-.card .side { position: absolute; width: 100%; }
+.card {  }
+.card .side { position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; }
+.card .back { background-color: $sectionbutton; }
 
 /* Two types of cards, div cards are big, button cards are the control to the big cards. */
-.card div.side { height: 100%; }
-.card div.back { background: $sectionbutton; }
-.card button { overflow: hidden; }
+.card div.side { overflow: auto; }
+.card button.side { overflow: hidden; }
 
 /* Transitions */
 .card {
@@ -57,7 +57,7 @@ header.main {
 }
 
 /* Each pane */
-section { min-height: 20px; }
+section { position: relative; min-height: 20px; }
 
 /* Each pane also gets a header. */
 section > header { min-height: 20px; height: 20px; max-height: 20px; padding: 0 0 0 6.5px; background-color: $sectionheader; }
@@ -67,6 +67,11 @@ section > header {
   button { margin: 0; padding: 0; border: none; font-size: 10px; line-height: 20px; background-color: $sectionbutton; box-shadow: inset rgba(0,0,0,0.17) 0 1px 1px; }
 
   .card { float: right; width: 40px; }
+}
+
+section {
+  .body { position: absolute; top: 20px; right: 0; bottom: 0; left: 0; overflow: auto; }
+  .body.card { overflow: visible; }
 }
 
 /* Flexbox layout. */

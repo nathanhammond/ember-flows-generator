@@ -6,9 +6,33 @@
       <button class="side back" {{action "flipState"}}>CODE</button>
     </div>
   </header>
-  <div class="card">
+  <div class="body card">
     <div class="side front">
       <dl>
+        <dt>isIdentified</dt>
+          <dd>true</dd>
+        <dt>isIdentified</dt>
+          <dd>true</dd>
+        <dt>isIdentified</dt>
+          <dd>true</dd>
+        <dt>isIdentified</dt>
+          <dd>true</dd>
+        <dt>isIdentified</dt>
+          <dd>true</dd>
+        <dt>isIdentified</dt>
+          <dd>true</dd>
+        <dt>isIdentified</dt>
+          <dd>true</dd>
+        <dt>isIdentified</dt>
+          <dd>true</dd>
+        <dt>isIdentified</dt>
+          <dd>true</dd>
+        <dt>isIdentified</dt>
+          <dd>true</dd>
+        <dt>isIdentified</dt>
+          <dd>true</dd>
+        <dt>isIdentified</dt>
+          <dd>true</dd>
         <dt>isIdentified</dt>
           <dd>true</dd>
       </dl>
@@ -26,6 +50,8 @@
     <header>
       <h1>Diagram</h1>
     </header>
+    <div class="body">
+    </div>
   </section>
 
   <div class="resize"></div>
@@ -34,7 +60,25 @@
     <header>
       <h1>Details</h1>
     </header>
-    <label for="entry-node">{{input type="checkbox" id="entry-node" name="entry-node" checked=entryNode}} Entry Node</label>
+    <div class="body">
+      <form>
+        <label for="route-name">Route Name {{input type="text" id="route-name" name="route-name" value=routeName}}</label>
+        <label for="entry-node">{{input type="checkbox" id="entry-node" name="entry-node" checked=entryNode}} Entry Node</label>
+      </form>
+
+      <h2>Actions</h2>
+      <ul>
+        <li>Action Name - Action Description - Linked</li>
+      </ul>
+      <form>
+        <h3>Add</h3>
+        <label for="action-name">Action Name {{input type="text" id="action-name" name="action-name" value=actionName}}</label>
+        <label for="action-description">Action Description {{input type="text" id="action-description" name="action-description" value=actionName}}</label>
+
+
+        <button>Add Action</button>
+      </form>
+    </div>
   </section>
 
   <div class="resize"></div>
@@ -43,7 +87,11 @@
     <header>
       <h1>Stepper</h1>
     </header>
-    <button>PLAY</button>
+    <div class="body">
+      <form>
+        <button>PLAY</button>
+      </form>
+    </div>
   </section>
 </section>
 
@@ -57,7 +105,7 @@
       <button class="side back" {{action "flipRouter"}}>CODE</button>
     </div>
   </header>
-  <div class="card">
+  <div class="body card">
     <div class="side front">
       <div class="node">routeName1</div>
       <div class="node">routeName2</div>
