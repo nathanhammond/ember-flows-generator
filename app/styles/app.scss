@@ -142,7 +142,7 @@ main > .resize {
   }
 }
 
-main > .resize:hover, main > .resize.active {
+main > .resize:hover, main > .resize.active, .resizing main > .resize.active:hover {
   background-image: linear-gradient(to bottom, $bordercolor 50%, transparent 50%);
 }
 
@@ -163,7 +163,7 @@ main > .resize:hover, main > .resize.active {
   }
 }
 
-.workspace > .resize:hover, .workspace > .resize.active {
+.workspace > .resize:hover, .workspace > .resize.active, .resizing .workspace > .resize.active:hover {
   background-image: linear-gradient(to right, $bordercolor 50%, transparent 50%);
 }
 
