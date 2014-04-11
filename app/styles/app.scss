@@ -141,13 +141,19 @@ main > .resize {
     repeat: repeat-y;
   }
 }
+
 main > .resize:hover, main > .resize.active {
   background-image: linear-gradient(to bottom, $bordercolor 50%, transparent 50%);
 }
 
+/* Since you can overlap other borders, those shouldn't become dotted. */
+.resizing main > .resize:hover {
+  background-image: linear-gradient(to bottom, $bordercolor 50%, $bordercolor 50%);
+}
+
 .workspace > .resize { position: static; height: 8px; margin: -4px 0; cursor: ns-resize; }
 
-/* Fake border that doesn't take up horizontal space. */
+/* Fake border that doesn't take up vertical space. */
 .workspace > .resize {
   background: {
     image: linear-gradient(to right, $bordercolor 50%, $bordercolor 50%);
@@ -156,8 +162,14 @@ main > .resize:hover, main > .resize.active {
     repeat: repeat-x;
   }
 }
+
 .workspace > .resize:hover, .workspace > .resize.active {
   background-image: linear-gradient(to right, $bordercolor 50%, transparent 50%);
+}
+
+/* Since you can overlap other borders, those shouldn't become dotted. */
+.resizing .workspace > .resize:hover {
+  background-image: linear-gradient(to right, $bordercolor 50%, $bordercolor 50%);
 }
 
 .resizing.width * { cursor: ew-resize; }
