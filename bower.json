@@ -9,6 +9,7 @@
     "ember-data": "1.0.0-beta.7",
     "ember-resolver": "git://github.com/stefanpenner/ember-jj-abrams-resolver.git#master",
     "ic-ajax": "~1.x",
+    "ember-load-initializers": "git://github.com/stefanpenner/ember-load-initializers",
     "loader": "git://github.com/stefanpenner/loader.js#1.0.0",
     "normalize-css": "^3.0.1",
     "codemirror": "^4.0.3"

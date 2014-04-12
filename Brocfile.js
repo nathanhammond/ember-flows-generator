@@ -3,8 +3,10 @@
 var uglifyJavaScript = require('broccoli-uglify-js');
 var replace = require('broccoli-replace');
 var compileES6 = require('broccoli-es6-concatenator');
+var validateES6 = require('broccoli-es6-import-validate');
 var pickFiles = require('broccoli-static-compiler');
 var mergeTrees = require('broccoli-merge-trees');
+var findBowerTrees = require('broccoli-bower');
 
 var env = require('broccoli-env').getEnv();
 var getEnvJSON = require('./config/environment');
@@ -47,7 +49,7 @@ module.exports = function (broccoli) {
     destDir: '/'
   });
 
-  var sourceTrees = [app, config, 'vendor'].concat(broccoli.bowerTrees());
+  var sourceTrees = [app, config, 'vendor'].concat(findBowerTrees());
   var appAndDependencies = mergeTrees(sourceTrees, { overwrite: true });
 
   // JavaScript
@@ -59,6 +61,7 @@ module.exports = function (broccoli) {
     'ic-ajax/dist/named-amd/main.js',
     'ember-data.js',
     'ember-resolver.js',
+    'ember-load-initializers.js',
     'ember-shim.js',
     'codemirror/lib/codemirror.js',
     'codemirror/mode/javascript/javascript.js'
@@ -70,6 +73,7 @@ module.exports = function (broccoli) {
     loaderFile: 'loader/loader.js',
     ignoredModules: [
       'ember/resolver',
+      'ember/load-initializers',
       'ic-ajax'
     ],
     inputFiles: [
@@ -89,7 +93,7 @@ module.exports = function (broccoli) {
 
   // Styles
 
-  var styles = preprocessCss(sourceTrees, prefix + '/styles', '/assets');
+  var styles = preprocessCss(appAndDependencies, prefix + '/styles', '/assets');
 
   // Ouput
 
@@ -128,10 +132,25 @@ module.exports = function (broccoli) {
 
     tests = preprocessTemplates(tests);
 
-    sourceTrees = [tests, 'vendor'].concat(broccoli.bowerTrees());
+    sourceTrees = [tests, 'vendor'].concat(findBowerTrees());
     appAndDependencies = mergeTrees(sourceTrees, { overwrite: true });
 
     var testsJs = preprocessJs(appAndDependencies, '/', prefix);
+
+    var validatedJs = validateES6(mergeTrees([app, tests]), {
+      whitelist: {
+        'ember/resolver': ['default'],
+        'ember/load-initializers': ['default'],
+        'ember-qunit': [
+          'globalize',
+          'moduleFor',
+          'moduleForComponent',
+          'moduleForModel',
+          'test',
+          'setResolver'
+        ]
+      }
+    });
 
     var legacyTestFiles = [
       'qunit/qunit/qunit.js',
@@ -147,6 +166,7 @@ module.exports = function (broccoli) {
       loaderFile: '_loader.js',
       ignoredModules: [
         'ember/resolver',
+        'ember/load-initializers',
         'ember-qunit'
       ],
       inputFiles: [
@@ -158,7 +178,7 @@ module.exports = function (broccoli) {
       outputFile: '/assets/tests.js'
     });
 
-    var testsTrees = [qunitStyles, testsIndexHTML, testsJs];
+    var testsTrees = [qunitStyles, testsIndexHTML, validatedJs, testsJs];
     outputTrees = outputTrees.concat(testsTrees);
   }
 
