@@ -1,5 +1,13 @@
 @import 'normalize';
 
+/* Workaround for libsass bug. */
+@mixin webkitcalc($property, $expression) {
+  #{$property}: -webkit-calc(#{$expression});
+}
+@mixin mozcalc($property, $expression) {
+  #{$property}: -moz-calc(#{$expression});
+}
+
 $font-family: Helvetica, Arial, sans-serif;
 $color: #FAF2EE;
 $background: #FAF4F1;
@@ -15,7 +23,7 @@ html, body { height: 100%; overflow: hidden; }
 
 /* Card positioning. */
 .card {  }
-.card .side { position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; }
+.card .side { position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; }
 .card .back { background-color: $sectionbutton; }
 
 /* Two types of cards, div cards are big, button cards are the control to the big cards. */
@@ -70,8 +78,12 @@ section > header {
 }
 
 section {
-  .body { position: absolute; top: 20px; right: 0; bottom: 0; left: 0; overflow: auto; }
-  .body.card { overflow: visible; }
+  .body { position: absolute; top: 20px; right: 0; bottom: 0; left: 0; overflow: auto; padding: 6.5px; }
+  .body.card { overflow: visible; padding: 0; }
+  .body.card .side { padding: 6.5px; height: calc(100% - 20px); }
+
+  /* Workaround for Firefox layout bug. box-sizing doesn't play nicely. Works in Firefox 30. */
+  .body.card .side { @include mozcalc(width, "100% - 13px"); @include mozcalc(height, "100% - 33px"); }
 }
 
 /* Flexbox layout. */
@@ -96,11 +108,6 @@ main { height: 100%; }
 main > .state { width: 20%; min-width: 100px; }
 main > .router { width: 20%; min-width: 100px; }
 main > .workspace { width: 60%; min-width: 160px; }
-
-/* Workaround for libsass bug. */
-@mixin webkitcalc($property, $expression) {
-  #{$property}: -webkit-calc(#{$expression});
-}
 
 /* The state, router, and workspace sections are also flexboxes. */
 .state, .router, .workspace {
