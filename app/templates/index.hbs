@@ -107,9 +107,9 @@
   </header>
   <div class="body card">
     <div class="side front">
-      <div class="node">routeName1</div>
-      <div class="node">routeName2</div>
-      <div class="node">routeName3</div>
+      {{#each routerNodes}}
+        <div class="node">{{this}}</div>
+      {{/each}}
     </div>
     <div class="side back">
       {{code-editor code=routerCode}}
