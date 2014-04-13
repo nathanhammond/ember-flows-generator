@@ -25,3 +25,9 @@ git clone git@github.com:nathanhammond/ember-flows-generator.git
 cd ember-flows-generator
 ./install.sh
 ```
+
+
+License
+-------
+
+ember-flows-generator is [MIT Licensed](https://github.com/nathanhammond/ember-flows-generator/blob/master/LICENSE.md).
