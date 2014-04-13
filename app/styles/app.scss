@@ -57,6 +57,9 @@ html, body { height: 100%; overflow: hidden; }
 header.main { height: 40px; padding: 0 13px; background: #e1563f url('../img/navigation_background_x2.png') center top repeat-x; background-size: 320px 40px; border-bottom: 1px solid #aa412f; box-shadow: rgba(0,0,0,0.3) 0 0 2px; }
 header.main {
   h1 { float: left; margin: 0 13px 0 0; font-size: 26px; line-height: 40px; font-family: $font-family; font-weight: normal; color: $color; text-shadow: rgba(0,0,0,0.3) 0px 1px 0px; }
+  h1 a { display: inline-block; color: #FFF; text-decoration: none; overflow: hidden; }
+  h1 a img { display: inline-block; margin: 0 3.25px 0 -15.25px; vertical-align: middle; transition: margin 0.1s; }
+  h1 a:hover img { margin-left: 0; }
 
   .buttons { float: right; }
   a.button, button { display: inline-block; height: 26px; line-height: 26px; margin: 7px 0; padding: 0 .5em; background-color: rgba(0,0,0,.17); border: 1px solid #a93926; border-radius: 4px; box-shadow: inset rgba(255,255,255,0.17) 0 1px 1px; font-family: $font-family; font-size: 13px; color: $color; text-shadow: rgba(0,0,0,0.3) 0px 1px 0px; text-decoration: none; }
