@@ -319,6 +319,7 @@ table {
 td, th {
   padding: 0; }
 
+/* Workaround for libsass bug. */
 * {
   box-sizing: border-box; }
 
@@ -337,7 +338,8 @@ html, body {
   right: 0;
   bottom: 0;
   left: 0;
-  width: 100%; }
+  width: 100%;
+  height: 100%; }
 
 .card .back {
   background-color: #F2D1CB; }
@@ -440,15 +442,25 @@ section > header .card {
   float: right;
   width: 40px; }
 
-section .body {
-  position: absolute;
-  top: 20px;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  overflow: auto; }
-section .body.card {
-  overflow: visible; }
+section {
+  /* Workaround for Firefox layout bug. box-sizing doesn't play nicely. Works in Firefox 30. */ }
+  section .body {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    padding: 6.5px; }
+  section .body.card {
+    overflow: visible;
+    padding: 0; }
+  section .body.card .side {
+    padding: 6.5px;
+    height: calc(100% - 20px); }
+  section .body.card .side {
+    width: -moz-calc(100% - 13px);
+    height: -moz-calc(100% - 33px); }
 
 /* Flexbox layout. */
 .application {
@@ -485,7 +497,6 @@ main > .workspace {
   width: 60%;
   min-width: 160px; }
 
-/* Workaround for libsass bug. */
 /* The state, router, and workspace sections are also flexboxes. */
 .state, .router, .workspace {
   display: -webkit-flex;
@@ -518,7 +529,9 @@ main > .workspace {
 
 .router .node {
   float: left;
-  height: 20px;
+  clear: left;
+  height: 30px;
+  padding: 5px;
   font-size: 10px;
   line-height: 20px;
   border: 1px solid black;
@@ -543,8 +556,12 @@ main > .resize {
   background-position: center top;
   background-repeat: repeat-y; }
 
-main > .resize:hover, main > .resize.active {
+main > .resize:hover, main > .resize.active, .resizing main > .resize.active:hover {
   background-image: linear-gradient(to bottom, #AA412F 50%, transparent 50%); }
+
+/* Since you can overlap other borders, those shouldn't become dotted. */
+.resizing main > .resize:hover {
+  background-image: linear-gradient(to bottom, #AA412F 50%, #AA412F 50%); }
 
 .workspace > .resize {
   position: static;
@@ -552,15 +569,19 @@ main > .resize:hover, main > .resize.active {
   margin: -4px 0;
   cursor: ns-resize; }
 
-/* Fake border that doesn't take up horizontal space. */
+/* Fake border that doesn't take up vertical space. */
 .workspace > .resize {
   background-image: linear-gradient(to right, #AA412F 50%, #AA412F 50%);
   background-size: 7px 1px;
   background-position: center center;
   background-repeat: repeat-x; }
 
-.workspace > .resize:hover, .workspace > .resize.active {
+.workspace > .resize:hover, .workspace > .resize.active, .resizing .workspace > .resize.active:hover {
   background-image: linear-gradient(to right, #AA412F 50%, transparent 50%); }
+
+/* Since you can overlap other borders, those shouldn't become dotted. */
+.resizing .workspace > .resize:hover {
+  background-image: linear-gradient(to right, #AA412F 50%, #AA412F 50%); }
 
 .resizing.width * {
   cursor: ew-resize; }
