@@ -65,7 +65,8 @@ module.exports = function (broccoli) {
     'ember-shim.js',
     'codemirror/lib/codemirror.js',
     'codemirror/mode/javascript/javascript.js',
-    'es6-module-transpiler.js'
+    'es6-module-transpiler.js',
+    'loop-protect.js'
   ];
 
   var applicationJs = preprocessJs(appAndDependencies, '/', prefix);

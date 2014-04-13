@@ -11,6 +11,10 @@
 !/vendor/qunit-shim.js
 !/vendor/_loader.js
 
+# components that are installed via install.sh
+app/styles/normalize.scss
+app/styles/components/code-editor/codemirror.scss
+
 # misc
 /.sass-cache
 /connect.lock
