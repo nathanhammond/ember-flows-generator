@@ -8,11 +8,11 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
-
+    ENV.rootURL = '/'
   }
 
   if (environment === 'production') {
-
+    ENV.rootURL = '/ember-flows-generator/'
   }
 
   return JSON.stringify(ENV); // Set in index.html
