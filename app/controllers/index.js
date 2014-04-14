@@ -39,7 +39,6 @@ export default Ember.Controller.extend({
       this.set('nodeCache', results);
       return results;
     } catch(error) {
-      console.log(error);
       return this.get('nodeCache');
     }
   }.property('routerTranspiledCode'),
