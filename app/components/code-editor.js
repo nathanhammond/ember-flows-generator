@@ -13,7 +13,7 @@ export default Ember.Component.extend({
 
     this.set('editor', editor);
 
-    editor.on('change', function(editor) {
+    editor.on('changes', function(editor) {
       this.set('code', editor.getValue());
     }.bind(this));
   }

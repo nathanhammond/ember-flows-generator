@@ -13,27 +13,36 @@ export default Ember.Controller.extend({
     var Compiler = ModuleTranspiler.Compiler;
     var compiler = new Compiler(this.get('routerCode'), 'router' + this.get('routerChangeCount'), {imports: []});
     var code = compiler.toAMD();
+    code = loopProtect.rewriteLoops(code);
     return code;
   }.property('routerCode'),
 
+  nodeCache: [],
+
   routerNodes: function() {
+    var results = [];
     // TODO: Figure out how to overwrite already-defined modules.
     // FIXME: Make this just define("router").
     // FIXME: Make sure the eval only runs when the router code is functional.
-    eval(this.get('routerTranspiledCode'));
-    var router = require('router' + this.get('routerChangeCount')).default;
-    var routeNames = router.create().router.recognizer.names;
-    var results = [];
+    try {
+      eval(this.get('routerTranspiledCode'));
+      var router = require('router' + this.get('routerChangeCount')).default;
+      var routeNames = router.create().router.recognizer.names;
 
-    var output;
-    for (var x in routeNames) {
-      if (!routeNames.hasOwnProperty(x)) { continue; }
-      if (x == 'application') { continue; }
+      var output;
+      for (var x in routeNames) {
+        if (!routeNames.hasOwnProperty(x)) { continue; }
+        if (x == 'application') { continue; }
 
-      output = routeNames[x].handlers.mapBy('handler').join('.');
-      results.push(output);
+        output = routeNames[x].handlers.mapBy('handler').join('.');
+        results.push(output);
+      }
+      this.set('nodeCache', results);
+      return results;
+    } catch(error) {
+      console.log(error);
+      return this.get('nodeCache');
     }
-    return results;
   }.property('routerTranspiledCode'),
 
   actions: {
