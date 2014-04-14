@@ -381,28 +381,16 @@ header.main {
 
 header.main h1 {
   float: left;
-  margin: 0 13px 0 0;
+  margin: 0;
   font-size: 26px;
   line-height: 40px;
   font-family: Helvetica, Arial, sans-serif;
   font-weight: normal;
   color: #FAF2EE;
   text-shadow: rgba(0, 0, 0, 0.3) 0px 1px 0px; }
-header.main h1 a {
-  display: inline-block;
-  color: #FFF;
-  text-decoration: none;
-  overflow: hidden; }
-header.main h1 a img {
-  display: inline-block;
-  margin: 0 3.25px 0 -15.25px;
-  vertical-align: middle;
-  transition: margin 0.1s; }
-header.main h1 a:hover img {
-  margin-left: 0; }
 header.main .buttons {
   float: right; }
-header.main a.button, header.main button {
+header.main button {
   display: inline-block;
   height: 26px;
   line-height: 26px;
@@ -415,14 +403,11 @@ header.main a.button, header.main button {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 13px;
   color: #FAF2EE;
-  text-shadow: rgba(0, 0, 0, 0.3) 0px 1px 0px;
-  text-decoration: none; }
-header.main a.button:hover, header.main button:hover {
+  text-shadow: rgba(0, 0, 0, 0.3) 0px 1px 0px; }
+header.main button:hover {
   background-color: rgba(0, 0, 0, 0.3); }
-header.main a.button + a.button, header.main button + button {
+header.main button + button {
   margin-left: 6.5px; }
-header.main a.button img, header.main button img {
-  vertical-align: text-bottom; }
 
 /* Each pane */
 section {
