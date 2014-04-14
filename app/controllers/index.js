@@ -23,7 +23,6 @@ export default Ember.Controller.extend({
     var results = [];
     // TODO: Figure out how to overwrite already-defined modules.
     // FIXME: Make this just define("router").
-    // FIXME: Make sure the eval only runs when the router code is functional.
     try {
       eval(this.get('routerTranspiledCode'));
       var router = require('router' + this.get('routerChangeCount')).default;
