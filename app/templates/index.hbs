@@ -7,36 +7,7 @@
     </div>
   </header>
   <div class="body card">
-    <div class="side front">
-      <dl>
-        <dt>isIdentified</dt>
-          <dd>true</dd>
-        <dt>isIdentified</dt>
-          <dd>true</dd>
-        <dt>isIdentified</dt>
-          <dd>true</dd>
-        <dt>isIdentified</dt>
-          <dd>true</dd>
-        <dt>isIdentified</dt>
-          <dd>true</dd>
-        <dt>isIdentified</dt>
-          <dd>true</dd>
-        <dt>isIdentified</dt>
-          <dd>true</dd>
-        <dt>isIdentified</dt>
-          <dd>true</dd>
-        <dt>isIdentified</dt>
-          <dd>true</dd>
-        <dt>isIdentified</dt>
-          <dd>true</dd>
-        <dt>isIdentified</dt>
-          <dd>true</dd>
-        <dt>isIdentified</dt>
-          <dd>true</dd>
-        <dt>isIdentified</dt>
-          <dd>true</dd>
-      </dl>
-    </div>
+    <div class="side front"></div>
     <div class="side back">
       {{code-editor code=stateCode}}
     </div>
@@ -75,7 +46,6 @@
         <label for="action-name">Action Name {{input type="text" id="action-name" name="action-name" value=actionName}}</label>
         <label for="action-description">Action Description {{input type="text" id="action-description" name="action-description" value=actionName}}</label>
 
-
         <button>Add Action</button>
       </form>
     </div>
@@ -107,9 +77,14 @@
   </header>
   <div class="body card">
     <div class="side front">
-      {{#each routerNodes}}
-        <div class="node">{{this}}</div>
-      {{/each}}
+        {{#unless routeTreeError}}
+          <ul>
+            {{route-tree tree=routeTree}}
+          </ul>
+        {{else}}
+          There is an error in your route file.
+        {{/unless}}
+
     </div>
     <div class="side back">
       {{code-editor code=routerCode}}

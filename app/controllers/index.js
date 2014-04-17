@@ -1,3 +1,58 @@
+/*
+
+buildSubTree and arrayizeChildren taken from:
+https://github.com/emberjs/ember-inspector/blob/ecc3a4b8c91b2b0ab0d68a3a8ad4518bb8fe8159/ember_debug/route_debug.js
+
+License:
+https://github.com/emberjs/ember-inspector/blob/c5234b84ce03699fb23f3115d07798edcdf5afdf/LICENSE
+
+*/
+
+function buildSubTree(routeTree, route) {
+  var handlers = route.handlers;
+  var subTree = routeTree
+  var item;
+
+  for (var i = 0; i < handlers.length; i++) {
+    item = handlers[i];
+    var handler = item.handler;
+    if (subTree[handler] === undefined) {
+
+      subTree[handler] = {
+        value: {
+          name: handler
+        }
+      };
+
+      if (i === handlers.length - 1) {
+        // it is a route, get url
+        subTree[handler].value.type = 'route';
+      } else {
+        // it is a resource, set children object
+        subTree[handler].children = {};
+        subTree[handler].value.type = 'resource';
+      }
+
+    }
+    subTree = subTree[handler].children;
+  }
+}
+
+function arrayizeChildren(routeTree) {
+  var obj = { value: routeTree.value };
+
+  if (routeTree.children) {
+    var childrenArray = [];
+    for(var i in routeTree.children) {
+      var route = routeTree.children[i];
+      childrenArray.push(arrayizeChildren(route));
+    }
+    obj.children = childrenArray;
+  }
+
+  return obj;
+}
+
 export default Ember.Controller.extend({
   stateFlipped: false,
   routerFlipped: false,
@@ -7,41 +62,38 @@ export default Ember.Controller.extend({
 
   routerChangeCount: 0,
 
-  routerTranspiledCode: function() {
+  routeTree: function() {
+    var compiler, transpiledCode, router;
+
+    var code = this.get('routerCode');
     this.incrementProperty('routerChangeCount');
 
-    var Compiler = ModuleTranspiler.Compiler;
-    var compiler = new Compiler(this.get('routerCode'), 'router' + this.get('routerChangeCount'), {imports: []});
-    var code = compiler.toAMD();
-    code = loopProtect.rewriteLoops(code);
-    return code;
+    try {
+      compiler = new ModuleTranspiler.Compiler(code, 'router' + this.get('routerChangeCount'), {imports: []});
+      transpiledCode = compiler.toAMD();
+      transpiledCode = loopProtect.rewriteLoops(transpiledCode);
+      eval(transpiledCode);
+      router = require('router' + this.get('routerChangeCount')).default;
+    } catch (e) {
+      return e;
+    }
+
+    var routeNames = router.create().router.recognizer.names;
+    var routeTree = {};
+    var route = undefined;
+
+    for (var routeName in routeNames) {
+      if (!routeNames.hasOwnProperty(routeName)) { continue; }
+      route = routeNames[routeName];
+      buildSubTree.call(this, routeTree, route);
+    }
+
+    return arrayizeChildren({ children: routeTree }).children[0];
   }.property('routerCode'),
 
-  nodeCache: [],
-
-  routerNodes: function() {
-    var results = [];
-    // TODO: Figure out how to overwrite already-defined modules.
-    // FIXME: Make this just define("router").
-    try {
-      eval(this.get('routerTranspiledCode'));
-      var router = require('router' + this.get('routerChangeCount')).default;
-      var routeNames = router.create().router.recognizer.names;
-
-      var output;
-      for (var x in routeNames) {
-        if (!routeNames.hasOwnProperty(x)) { continue; }
-        if (x == 'application') { continue; }
-
-        output = routeNames[x].handlers.mapBy('handler').join('.');
-        results.push(output);
-      }
-      this.set('nodeCache', results);
-      return results;
-    } catch(error) {
-      return this.get('nodeCache');
-    }
-  }.property('routerTranspiledCode'),
+  routeTreeError: function() {
+    return this.get('routeTree') instanceof Error;
+  }.property('routeTree'),
 
   actions: {
     flipState: function() {

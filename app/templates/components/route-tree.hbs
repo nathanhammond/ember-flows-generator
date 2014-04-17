@@ -1,0 +1,8 @@
+{{tree.value.name}}
+{{#if tree.children}}
+  <ul>
+    {{#each tree.children}}
+      {{route-tree tree=this}}
+    {{/each}}
+  </ul>
+{{/if}}
