@@ -542,17 +542,6 @@ main > .workspace {
   height: 100%;
   display: block; }
 
-.router .node {
-  float: left;
-  clear: left;
-  height: 30px;
-  padding: 5px;
-  font-size: 10px;
-  line-height: 20px;
-  border: 1px solid black;
-  border-radius: 20px;
-  text-align: center; }
-
 /* Blocks to serve as resize handles. */
 .resize {
   z-index: 100; }
@@ -942,3 +931,10 @@ div.CodeMirror-cursors {
   /* Hide the cursor when printing */
   .CodeMirror div.CodeMirror-cursors {
     visibility: hidden; } }
+
+section.router .front ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+section.router .front ul ul {
+  margin-left: 6.5px; }
