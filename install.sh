@@ -10,6 +10,7 @@ cp vendor/codemirror/lib/codemirror.css app/styles/components/code-editor/codemi
 cd vendor/escodegen
 npm install
 npm run-script build
+rm -rf node_modules
 cd ../../
 
 git checkout vendor
