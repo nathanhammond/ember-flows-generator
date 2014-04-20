@@ -66,6 +66,8 @@ module.exports = function (broccoli) {
     'codemirror/lib/codemirror.js',
     'codemirror/mode/javascript/javascript.js',
     'es6-module-transpiler.js',
+    'esprima.js',
+    'escodegen.browser.js',
     'loop-protect.js'
   ];
 

@@ -13,6 +13,8 @@
     "loader": "git://github.com/stefanpenner/loader.js#1.0.0",
     "normalize-css": "^3.0.1",
     "codemirror": "^4.0.3",
-    "loop-protect": "0.9.0"
+    "loop-protect-esprima": "git://github.com/nathanhammond/loop-protect-esprima.git#master",
+    "esprima": "git://github.com/ariya/esprima.git#master",
+    "escodegen": "git://github.com/Constellation/escodegen.git#master"
   }
 }
