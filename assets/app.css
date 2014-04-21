@@ -935,6 +935,14 @@ div.CodeMirror-cursors {
 section.router .front ul {
   margin: 0;
   padding: 0;
-  list-style: none; }
+  list-style: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default; }
 section.router .front ul ul {
   margin-left: 6.5px; }
+section.router .front li.focused {
+  font-weight: bold; }
+section.router .front li.focused ul {
+  font-weight: normal; }
