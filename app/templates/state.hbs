@@ -1,0 +1,13 @@
+<header>
+  <h1>STATE</h1>
+  <div class="card">
+    <button class="side front" {{action "flip"}}>CALC</button>
+    <button class="side back" {{action "flip"}}>CODE</button>
+  </div>
+</header>
+<div class="body card">
+  <div class="side front"></div>
+  <div class="side back">
+    {{code-editor code=code}}
+  </div>
+</div>

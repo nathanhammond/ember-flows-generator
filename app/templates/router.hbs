@@ -1,0 +1,21 @@
+<header>
+  <h1>ROUTER</h1>
+  <div class="card">
+    <button class="side front" {{action "flip"}}>NODES</button>
+    <button class="side back" {{action "flip"}}>CODE</button>
+  </div>
+</header>
+<div class="body card">
+  <div class="side front">
+      {{#unless routeTreeError}}
+        <ul>
+          {{tree-node node=routeTree currentNode=currentRoute focus="focus"}}
+        </ul>
+      {{else}}
+        There is an error in your route file.
+      {{/unless}}
+  </div>
+  <div class="side back">
+    {{code-editor code=code}}
+  </div>
+</div>

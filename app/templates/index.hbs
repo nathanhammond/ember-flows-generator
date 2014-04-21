@@ -1,18 +1,4 @@
-<section {{bind-attr class=":state stateFlipped:flipped"}}>
-  <header>
-    <h1>STATE</h1>
-    <div class="card">
-      <button class="side front" {{action "flipState"}}>CALC</button>
-      <button class="side back" {{action "flipState"}}>CODE</button>
-    </div>
-  </header>
-  <div class="body card">
-    <div class="side front"></div>
-    <div class="side back">
-      {{code-editor code=stateCode}}
-    </div>
-  </div>
-</section>
+{{render 'state'}}
 
 <div class="resize"></div>
 
@@ -67,27 +53,4 @@
 
 <div class="resize"></div>
 
-<section {{bind-attr class=":router routerFlipped:flipped"}}>
-  <header>
-    <h1>ROUTER</h1>
-    <div class="card">
-      <button class="side front" {{action "flipRouter"}}>NODES</button>
-      <button class="side back" {{action "flipRouter"}}>CODE</button>
-    </div>
-  </header>
-  <div class="body card">
-    <div class="side front">
-        {{#unless routeTreeError}}
-          <ul>
-            {{tree-node node=routeTree currentNode=currentRoute focus="focusRoute"}}
-          </ul>
-        {{else}}
-          There is an error in your route file.
-        {{/unless}}
-
-    </div>
-    <div class="side back">
-      {{code-editor code=routerCode}}
-    </div>
-  </div>
-</section>
+{{render 'router'}}
