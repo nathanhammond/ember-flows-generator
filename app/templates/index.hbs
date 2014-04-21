@@ -1,56 +1,11 @@
 {{render 'state'}}
-
 <div class="resize"></div>
-
 <section class="workspace">
-  <section class="canvas">
-    <header>
-      <h1>Diagram</h1>
-    </header>
-    <div class="body">
-    </div>
-  </section>
-
+  {{render 'canvas'}}
   <div class="resize"></div>
-
-  <section class="details">
-    <header>
-      <h1>Details</h1>
-    </header>
-    <div class="body">
-      <form>
-        <label for="route-name">Route Name {{input type="text" id="route-name" name="route-name" value=routeName}}</label>
-        <label for="entry-node">{{input type="checkbox" id="entry-node" name="entry-node" checked=entryNode}} Entry Node</label>
-      </form>
-
-      <h2>Actions</h2>
-      <ul>
-        <li>Action Name - Action Description - Linked</li>
-      </ul>
-      <form>
-        <h3>Add</h3>
-        <label for="action-name">Action Name {{input type="text" id="action-name" name="action-name" value=actionName}}</label>
-        <label for="action-description">Action Description {{input type="text" id="action-description" name="action-description" value=actionName}}</label>
-
-        <button>Add Action</button>
-      </form>
-    </div>
-  </section>
-
+  {{render 'details'}}
   <div class="resize"></div>
-
-  <section class="stepper">
-    <header>
-      <h1>Stepper</h1>
-    </header>
-    <div class="body">
-      <form>
-        <button>PLAY</button>
-      </form>
-    </div>
-  </section>
+  {{render 'stepper'}}
 </section>
-
 <div class="resize"></div>
-
 {{render 'router'}}
