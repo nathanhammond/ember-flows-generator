@@ -22,7 +22,6 @@ body { background-color: $background; }
 html, body { height: 100%; overflow: hidden; }
 
 /* Card positioning. */
-.card {  }
 .card .side { position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; }
 .card .back { background-color: $sectionbutton; }
 
@@ -77,6 +76,8 @@ section > header { min-height: 20px; height: 20px; max-height: 20px; padding: 0 
 section > header {
   & > * { height: 20px; }
   h1 { float: left; margin: 0; font-size: 10px; line-height: 20px; text-transform: uppercase; }
+  a { text-decoration: none; color: #000; }
+  a:hover { text-decoration: underline; }
   button { margin: 0; padding: 0; border: none; font-size: 10px; line-height: 20px; background-color: $sectionbutton; box-shadow: inset rgba(0,0,0,0.17) 0 1px 1px; }
 
   .card { float: right; width: 40px; }
