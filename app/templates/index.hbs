@@ -79,7 +79,7 @@
     <div class="side front">
         {{#unless routeTreeError}}
           <ul>
-            {{route-tree tree=routeTree}}
+            {{tree-node node=routeTree currentNode=currentRoute focus="focusRoute"}}
           </ul>
         {{else}}
           There is an error in your route file.

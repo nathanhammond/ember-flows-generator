@@ -88,6 +88,8 @@ export default Ember.Controller.extend({
       buildSubTree.call(this, routeTree, route);
     }
 
+    this.set('currentRoute', undefined);
+
     return arrayizeChildren({ children: routeTree }).children[0];
   }.property('routerCode'),
 
@@ -95,12 +97,17 @@ export default Ember.Controller.extend({
     return this.get('routeTree') instanceof Error;
   }.property('routeTree'),
 
+  currentRoute: undefined,
+
   actions: {
     flipState: function() {
       this.toggleProperty('stateFlipped');
     },
     flipRouter: function() {
       this.toggleProperty('routerFlipped');
+    },
+    focusRoute: function(route) {
+      this.set('currentRoute', route);
     }
   }
 })
