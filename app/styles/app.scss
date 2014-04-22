@@ -80,5 +80,8 @@ header.main { min-height: 40px; max-height: 40px; }
 @import 'resizing';
 @import 'index';
 
-@import 'components/code-editor/code-editor';
+@import 'sections';
 @import 'router';
+@import 'state';
+
+@import 'components/code-editor/code-editor';

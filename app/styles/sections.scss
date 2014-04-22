@@ -1,0 +1,23 @@
+/* Each pane */
+section { position: relative; min-height: 20px; }
+
+/* Each pane also gets a header. */
+section > header { min-height: 20px; height: 20px; max-height: 20px; padding: 0 0 0 6.5px; background-color: $sectionheader; }
+section > header {
+  & > * { height: 20px; }
+  h1 { float: left; margin: 0; font-size: 10px; line-height: 20px; text-transform: uppercase; }
+  a { text-decoration: none; color: #000; }
+  a:hover { text-decoration: underline; }
+  button { margin: 0; padding: 0; border: none; font-size: 10px; line-height: 20px; background-color: $sectionbutton; box-shadow: inset rgba(0,0,0,0.17) 0 1px 1px; }
+
+  .card { float: right; width: 40px; }
+}
+
+section {
+  .body { position: absolute; top: 20px; right: 0; bottom: 0; left: 0; overflow: auto; padding: 6.5px; }
+  .body.card { overflow: visible; padding: 0; }
+  .body.card .side { padding: 6.5px; height: calc(100% - 20px); }
+
+  /* Workaround for Firefox layout bug. box-sizing doesn't play nicely. Works in Firefox 30. */
+  .body.card .side { @include mozcalc(width, "100% - 13px"); @include mozcalc(height, "100% - 33px"); }
+}

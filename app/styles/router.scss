@@ -1,7 +1,10 @@
-section.router .front {
-  ul { margin: 0; padding: 0; list-style: none; -moz-user-select: none; -webkit-user-select: none; user-select: none; cursor: default; }
-  ul ul { margin-left: 6.5px; }
+section.router {
+  .card { height: 100%; }
+  .front {
+    ul { margin: 0; padding: 0; list-style: none; -moz-user-select: none; -webkit-user-select: none; user-select: none; cursor: default; }
+    ul ul { margin-left: 6.5px; }
 
-  li.focused { font-weight: bold; }
-  li.focused ul { font-weight: normal; }
+    li.focused { font-weight: bold; }
+    li.focused ul { font-weight: normal; }
+  }
 }
