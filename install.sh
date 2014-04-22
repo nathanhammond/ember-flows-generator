@@ -14,3 +14,4 @@ rm -rf node_modules
 cd ../../
 
 git checkout vendor
+rm .gitkeep

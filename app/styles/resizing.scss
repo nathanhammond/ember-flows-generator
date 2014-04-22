@@ -1,0 +1,55 @@
+/* Blocks to serve as resize handles. */
+.resize { z-index: 100; }
+
+
+/* HORIZONTAL RESIZING (WIDTH) */
+.resize.horizontal { position: absolute; width: 8px; margin: 0 -4px; height: 100%; cursor: ew-resize; }
+
+/* Fake border that doesn't take up space. */
+.resize.horizontal {
+  background: {
+    image: linear-gradient(to bottom, $bordercolor 50%, $bordercolor 50%);
+    size: 1px 7px;
+    position: center top;
+    repeat: repeat-y;
+  }
+}
+
+.resize.horizontal:hover, .resize.horizontal.active, .resizing .resize.horizontal.active:hover {
+  background-image: linear-gradient(to bottom, $bordercolor 50%, transparent 50%);
+}
+
+/* Since you can overlap other borders, those shouldn't become dotted. */
+/* A higher specificity selector is above to cancel this for the active resize. */
+.resizing .resize.horizontal:hover {
+  background-image: linear-gradient(to bottom, $bordercolor 50%, $bordercolor 50%);
+}
+
+
+/* VERTICAL RESIZING (HEIGHT) */
+.resize.vertical { position: static; height: 8px; margin: -4px 0; cursor: ns-resize; }
+
+/* Fake border that doesn't take up space. */
+.resize.vertical {
+  background: {
+    image: linear-gradient(to right, $bordercolor 50%, $bordercolor 50%);
+    size: 7px 1px;
+    position: center center;
+    repeat: repeat-x;
+  }
+}
+
+.resize.vertical:hover, .resize.vertical.active, .resizing .resize.vertical.active:hover {
+  background-image: linear-gradient(to right, $bordercolor 50%, transparent 50%);
+}
+
+/* Since you can overlap other borders, those shouldn't become dotted. */
+/* A higher specificity selector is above to cancel this for the active resize. */
+.resizing .resize.vertical:hover {
+  background-image: linear-gradient(to right, $bordercolor 50%, $bordercolor 50%);
+}
+
+/* If you move your cursor quickly it'll move outside of the block and change. */
+/* This fixes that behavior. */
+.resizing.width * { cursor: ew-resize; }
+.resizing.height * { cursor: ns-resize; }
