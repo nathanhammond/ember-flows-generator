@@ -416,6 +416,116 @@ header.main a.button + a.button, header.main button + button {
 header.main a.button img, header.main button img {
   vertical-align: text-bottom; }
 
+/* Flexbox layout. */
+.application {
+  display: -webkit-flex;
+  -webkit-flex-direction: column;
+  display: flex;
+  flex-direction: column; }
+
+.application {
+  height: 100%; }
+
+header.main {
+  min-height: 40px;
+  max-height: 40px; }
+
+/* Blocks to serve as resize handles. */
+.resize {
+  z-index: 100; }
+
+/* HORIZONTAL RESIZING (WIDTH) */
+.resize.horizontal {
+  position: absolute;
+  width: 8px;
+  margin: 0 -4px;
+  height: 100%;
+  cursor: ew-resize; }
+
+/* Fake border that doesn't take up space. */
+.resize.horizontal {
+  background-image: linear-gradient(to bottom, #AA412F 50%, #AA412F 50%);
+  background-size: 1px 7px;
+  background-position: center top;
+  background-repeat: repeat-y; }
+
+.resize.horizontal:hover, .resize.horizontal.active, .resizing .resize.horizontal.active:hover {
+  background-image: linear-gradient(to bottom, #AA412F 50%, transparent 50%); }
+
+/* Since you can overlap other borders, those shouldn't become dotted. */
+/* A higher specificity selector is above to cancel this for the active resize. */
+.resizing .resize.horizontal:hover {
+  background-image: linear-gradient(to bottom, #AA412F 50%, #AA412F 50%); }
+
+/* VERTICAL RESIZING (HEIGHT) */
+.resize.vertical {
+  position: static;
+  height: 8px;
+  margin: -4px 0;
+  cursor: ns-resize; }
+
+/* Fake border that doesn't take up space. */
+.resize.vertical {
+  background-image: linear-gradient(to right, #AA412F 50%, #AA412F 50%);
+  background-size: 7px 1px;
+  background-position: center center;
+  background-repeat: repeat-x; }
+
+.resize.vertical:hover, .resize.vertical.active, .resizing .resize.vertical.active:hover {
+  background-image: linear-gradient(to right, #AA412F 50%, transparent 50%); }
+
+/* Since you can overlap other borders, those shouldn't become dotted. */
+/* A higher specificity selector is above to cancel this for the active resize. */
+.resizing .resize.vertical:hover {
+  background-image: linear-gradient(to right, #AA412F 50%, #AA412F 50%); }
+
+/* If you move your cursor quickly it'll move outside of the block and change. */
+/* This fixes that behavior. */
+.resizing.width * {
+  cursor: ew-resize; }
+
+.resizing.height * {
+  cursor: ns-resize; }
+
+/* The overall container for the application area is a horizontal flexbox with 100% height. */
+.index {
+  height: 100%; }
+
+.index {
+  display: -webkit-flex;
+  -webkit-flex-direction: row;
+  display: flex;
+  flex-direction: row; }
+
+.index {
+  /* The state, router, and workspace sections are also flexboxes. */
+  /* Force height calculation to account for the header. */ }
+  .index .state {
+    width: 20%;
+    min-width: 100px; }
+  .index .router {
+    width: 20%;
+    min-width: 100px; }
+  .index .workspace {
+    width: 60%;
+    min-width: 160px; }
+  .index .state, .index .router, .index .workspace {
+    display: -webkit-flex;
+    -webkit-flex-direction: column;
+    display: flex;
+    flex-direction: column; }
+  .index .state, .index .router, .index .workspace {
+    height: 100%;
+    height: -webkit-calc(100% - 40px); }
+  .index .workspace .canvas {
+    height: 60%; }
+  .index .workspace .details {
+    height: 30%; }
+  .index .workspace .stepper {
+    height: 10%; }
+  .index .resize.horizontal {
+    height: calc(100% - 40px); }
+
 /* Each pane */
 section {
   position: relative;
@@ -474,121 +584,25 @@ section {
     width: -moz-calc(100% - 13px);
     height: -moz-calc(100% - 33px); }
 
-/* Flexbox layout. */
-.application {
-  display: -webkit-flex;
-  -webkit-flex-direction: column;
-  display: flex;
-  flex-direction: column; }
-
-.application {
+section.router .card {
   height: 100%; }
+section.router .front ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default; }
+section.router .front ul ul {
+  margin-left: 6.5px; }
+section.router .front li.focused {
+  font-weight: bold; }
+section.router .front li.focused ul {
+  font-weight: normal; }
 
-header.main {
-  min-height: 40px;
-  max-height: 40px; }
-
-main {
-  display: -webkit-flex;
-  -webkit-flex-direction: row;
-  display: flex;
-  flex-direction: row; }
-
-main {
+section.state .card {
   height: 100%; }
-
-main > .state {
-  width: 20%;
-  min-width: 100px; }
-
-main > .router {
-  width: 20%;
-  min-width: 100px; }
-
-main > .workspace {
-  width: 60%;
-  min-width: 160px; }
-
-/* The state, router, and workspace sections are also flexboxes. */
-.state, .router, .workspace {
-  display: -webkit-flex;
-  -webkit-flex-direction: column;
-  display: flex;
-  flex-direction: column; }
-
-.state, .router, .workspace {
-  height: 100%;
-  height: -webkit-calc(100% - 40px); }
-
-/* Crazy! the workspace is *also* a flexbox. */
-.workspace .stepper {
-  height: 10%; }
-
-.workspace .canvas {
-  height: 60%; }
-
-.workspace .details {
-  height: 30%; }
-
-/* If the section is a card, set its height. */
-.state > .card, .router > .card {
-  height: 100%; }
-
-.state > .card textarea, .router > .card textarea {
-  width: 100%;
-  height: 100%;
-  display: block; }
-
-/* Blocks to serve as resize handles. */
-.resize {
-  z-index: 100; }
-
-main > .resize {
-  position: absolute;
-  width: 8px;
-  margin: 0 -4px;
-  height: calc(100% - 40px);
-  cursor: ew-resize; }
-
-/* Fake border that doesn't take up horizontal space. */
-main > .resize {
-  background-image: linear-gradient(to bottom, #AA412F 50%, #AA412F 50%);
-  background-size: 1px 7px;
-  background-position: center top;
-  background-repeat: repeat-y; }
-
-main > .resize:hover, main > .resize.active, .resizing main > .resize.active:hover {
-  background-image: linear-gradient(to bottom, #AA412F 50%, transparent 50%); }
-
-/* Since you can overlap other borders, those shouldn't become dotted. */
-.resizing main > .resize:hover {
-  background-image: linear-gradient(to bottom, #AA412F 50%, #AA412F 50%); }
-
-.workspace > .resize {
-  position: static;
-  height: 8px;
-  margin: -4px 0;
-  cursor: ns-resize; }
-
-/* Fake border that doesn't take up vertical space. */
-.workspace > .resize {
-  background-image: linear-gradient(to right, #AA412F 50%, #AA412F 50%);
-  background-size: 7px 1px;
-  background-position: center center;
-  background-repeat: repeat-x; }
-
-.workspace > .resize:hover, .workspace > .resize.active, .resizing .workspace > .resize.active:hover {
-  background-image: linear-gradient(to right, #AA412F 50%, transparent 50%); }
-
-/* Since you can overlap other borders, those shouldn't become dotted. */
-.resizing .workspace > .resize:hover {
-  background-image: linear-gradient(to right, #AA412F 50%, #AA412F 50%); }
-
-.resizing.width * {
-  cursor: ew-resize; }
-
-.resizing.height * {
-  cursor: ns-resize; }
 
 .code-editor {
   height: 100%; }
@@ -928,18 +942,3 @@ div.CodeMirror-cursors {
   /* Hide the cursor when printing */
   .CodeMirror div.CodeMirror-cursors {
     visibility: hidden; } }
-
-section.router .front ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-  cursor: default; }
-section.router .front ul ul {
-  margin-left: 6.5px; }
-section.router .front li.focused {
-  font-weight: bold; }
-section.router .front li.focused ul {
-  font-weight: normal; }
