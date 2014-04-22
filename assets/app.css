@@ -331,7 +331,6 @@ html, body {
   overflow: hidden; }
 
 /* Card positioning. */
-
 .card .side {
   position: absolute;
   top: 0;
@@ -393,13 +392,6 @@ header.main h1 a {
   color: #FFF;
   text-decoration: none;
   overflow: hidden; }
-header.main h1 a img {
-  display: inline-block;
-  margin: 0 3.25px 0 -15.25px;
-  vertical-align: middle;
-  transition: margin 0.1s; }
-header.main h1 a:hover img {
-  margin-left: 0; }
 header.main .buttons {
   float: right; }
 header.main a.button, header.main button {
@@ -445,6 +437,11 @@ section > header h1 {
   font-size: 10px;
   line-height: 20px;
   text-transform: uppercase; }
+section > header a {
+  text-decoration: none;
+  color: #000; }
+section > header a:hover {
+  text-decoration: underline; }
 section > header button {
   margin: 0;
   padding: 0;
