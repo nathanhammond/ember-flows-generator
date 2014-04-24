@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script>
-      window.ENV = {"rootURL":"/ember-flows-generator/","FEATURES":{}};
+      window.ENV = {"rootURL":"/","FEATURES":{},"APP":{"LOG_RESOLVER":true,"LOG_ACTIVE_GENERATION":true,"LOG_MODULE_RESOLVER":true,"LOG_VIEW_LOOKUPS":true}};
       document.write('<base href="' + ENV.rootURL + '" />');
     </script>
 
@@ -17,7 +17,7 @@
   </head>
   <body>
     <script>
-      window.EmberFlowsGenerator = require('ember-flows-generator/app')['default'].create();
+      window.EmberFlowsGenerator = require('ember-flows-generator/app')['default'].create(ENV.APP);
     </script>
   </body>
 </html>

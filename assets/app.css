@@ -709,20 +709,12 @@ section.state .card {
 .cm-s-default .cm-def {
   color: #00f; }
 
-.cm-s-default .cm-variable {
-  color: black; }
 
 .cm-s-default .cm-variable-2 {
   color: #05a; }
 
 .cm-s-default .cm-variable-3 {
   color: #085; }
-
-.cm-s-default .cm-property {
-  color: black; }
-
-.cm-s-default .cm-operator {
-  color: black; }
 
 .cm-s-default .cm-comment {
   color: #a50; }
@@ -946,6 +938,9 @@ div.CodeMirror-cursors {
 .CodeMirror-focused .CodeMirror-selected {
   background: #d7d4f0; }
 
+.CodeMirror-crosshair {
+  cursor: crosshair; }
+
 .cm-searching {
   background: #ffa;
   background: rgba(255, 255, 0, 0.4); }
@@ -962,3 +957,9 @@ div.CodeMirror-cursors {
   /* Hide the cursor when printing */
   .CodeMirror div.CodeMirror-cursors {
     visibility: hidden; } }
+
+section.canvas .body {
+  transition: box-shadow 0.1s; }
+
+.dragging section.canvas .body {
+  box-shadow: inset 0 0 5px #AA412F; }
