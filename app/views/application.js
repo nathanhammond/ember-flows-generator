@@ -1,27 +1,23 @@
 export default Ember.View.extend({
   classNames: ['application'],
-  classNameBindings: ['resizing', 'resizingDimension'],
 
   resizing: false,
-  resizingDimension: undefined,
-  resizingElem: undefined,
 
   mouseDown: function(e) {
-    if (e.target.classList.contains('resize')) {
-      e.preventDefault();
-      e.target.classList.add('active');
+    if (!e.target.classList.contains('resize')) { return; }
 
-      this.set('resizing', true);
-      this.set('resizingDimension', e.target.parentNode.classList.contains('workspace') ? 'height' : 'width');
-      this.set('resizingElem', e.target);
-    }
-  },
-  mouseMove: function(e) {
-    if (this.get('resizing')) {
+    e.preventDefault();
+    this.set('resizing', true);
+
+    var elem = e.target;
+    var dimension = elem.classList.contains('horizontal') ? 'width' : 'height';
+    elem.classList.add('active');
+    document.body.classList.add('resizing', 'resizing-'+dimension);
+
+    var mouseMoveHandler = function(e) {
       e.preventDefault();
 
-      var dimension = this.get('resizingDimension'),
-          measure, cursor;
+      var measure, cursor;
 
       if (dimension == 'width') {
         measure = "right";
@@ -31,7 +27,6 @@ export default Ember.View.extend({
         cursor = e.pageY;
       }
 
-      var elem = this.get('resizingElem');
       var previous = elem.previousElementSibling;
       var next = elem.nextElementSibling;
 
@@ -43,13 +38,13 @@ export default Ember.View.extend({
 
       previous.style[dimension] = newpreviousdimension + 'px';
       next.style[dimension] = newnextdimension + 'px';
-    }
-  },
-  mouseUp: function(e) {
-    if (this.get('resizing')) {
-      var elem = this.get('resizingElem');
+    }.bind(this);
 
-      var dimension = this.get('resizingDimension');
+    var mouseUpHandler = function(e) {
+      e.preventDefault();
+
+      document.body.removeEventListener('mousemove', mouseMoveHandler);
+      document.body.removeEventListener('mouseup', mouseUpHandler);
 
       var sections = [].slice.call(elem.parentNode.childNodes).filter(function(element) {
         return element.nodeType === Node.ELEMENT_NODE && element.tagName.toLowerCase() === 'section';
@@ -71,9 +66,12 @@ export default Ember.View.extend({
       });
 
       elem.classList.remove('active');
+      document.body.classList.remove('resizing', 'resizing-'+dimension);
+
       this.set('resizing', false);
-      this.set('resizingDimension', undefined);
-      this.set('resizingElem', undefined);
-    }
+    }.bind(this);
+
+    document.body.addEventListener('mousemove', mouseMoveHandler);
+    document.body.addEventListener('mouseup', mouseUpHandler);
   }
 });

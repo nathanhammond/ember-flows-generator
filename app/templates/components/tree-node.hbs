@@ -1,4 +1,4 @@
-<span {{action 'focus' node}}>{{node.value.name}}</span>
+<span class="target" {{action 'focus' node}}>{{node.value.name}}</span>
 {{#if node.children}}
   <ul>
     {{#each node in node.children}}

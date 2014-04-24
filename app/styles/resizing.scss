@@ -1,6 +1,11 @@
+/* If you move your cursor quickly it'll move outside of the block and change. */
+/* This fixes that behavior. */
+body.resizing { -moz-user-select: none; -webkit-user-select: none; user-select: none; }
+body.resizing-width, body.resizing-width * { cursor: ew-resize !important; }
+body.resizing-height, body.resizing-height * { cursor: ns-resize !important; }
+
 /* Blocks to serve as resize handles. */
 .resize { z-index: 100; }
-
 
 /* HORIZONTAL RESIZING (WIDTH) */
 .resize.horizontal { position: absolute; width: 8px; margin: 0 -4px; height: 100%; cursor: ew-resize; }
@@ -19,8 +24,8 @@
   background-image: linear-gradient(to bottom, $bordercolor 50%, transparent 50%);
 }
 
-/* Since you can overlap other borders, those shouldn't become dotted. */
-/* A higher specificity selector is above to cancel this for the active resize. */
+/* Since you can move your mouse over other borders, those shouldn't become dotted. */
+/* A higher specificity selector is above to cancel this for the active resize block. */
 .resizing .resize.horizontal:hover {
   background-image: linear-gradient(to bottom, $bordercolor 50%, $bordercolor 50%);
 }
@@ -34,7 +39,7 @@
   background: {
     image: linear-gradient(to right, $bordercolor 50%, $bordercolor 50%);
     size: 7px 1px;
-    position: center center;
+    position: center left;
     repeat: repeat-x;
   }
 }
@@ -43,13 +48,8 @@
   background-image: linear-gradient(to right, $bordercolor 50%, transparent 50%);
 }
 
-/* Since you can overlap other borders, those shouldn't become dotted. */
-/* A higher specificity selector is above to cancel this for the active resize. */
+/* Since you can move your mouse over other borders, those shouldn't become dotted. */
+/* A higher specificity selector is above to cancel this for the active resize block. */
 .resizing .resize.vertical:hover {
   background-image: linear-gradient(to right, $bordercolor 50%, $bordercolor 50%);
 }
-
-/* If you move your cursor quickly it'll move outside of the block and change. */
-/* This fixes that behavior. */
-.resizing.width * { cursor: ew-resize; }
-.resizing.height * { cursor: ns-resize; }

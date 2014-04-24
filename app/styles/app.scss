@@ -78,6 +78,7 @@ header.main {
 header.main { min-height: 40px; max-height: 40px; }
 
 @import 'resizing';
+@import 'dragging';
 @import 'index';
 
 @import 'sections';

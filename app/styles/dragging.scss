@@ -1,0 +1,7 @@
+/* If you move your cursor quickly it'll move outside of the block and change. */
+/* This fixes that behavior. */
+body.dragging { -moz-user-select: none; -webkit-user-select: none; user-select: none; }
+body.dragging, body.dragging * { cursor: move !important; }
+
+/* Set up a block. */
+.dragproxy { position: absolute; top: -100px; left: -100px; background: red; z-index: 1000; }
