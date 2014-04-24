@@ -430,6 +430,19 @@ header.main {
   min-height: 40px;
   max-height: 40px; }
 
+/* If you move your cursor quickly it'll move outside of the block and change. */
+/* This fixes that behavior. */
+body.resizing {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none; }
+
+body.resizing-width, body.resizing-width * {
+  cursor: ew-resize !important; }
+
+body.resizing-height, body.resizing-height * {
+  cursor: ns-resize !important; }
+
 /* Blocks to serve as resize handles. */
 .resize {
   z-index: 100; }
@@ -452,8 +465,8 @@ header.main {
 .resize.horizontal:hover, .resize.horizontal.active, .resizing .resize.horizontal.active:hover {
   background-image: linear-gradient(to bottom, #AA412F 50%, transparent 50%); }
 
-/* Since you can overlap other borders, those shouldn't become dotted. */
-/* A higher specificity selector is above to cancel this for the active resize. */
+/* Since you can move your mouse over other borders, those shouldn't become dotted. */
+/* A higher specificity selector is above to cancel this for the active resize block. */
 .resizing .resize.horizontal:hover {
   background-image: linear-gradient(to bottom, #AA412F 50%, #AA412F 50%); }
 
@@ -468,24 +481,34 @@ header.main {
 .resize.vertical {
   background-image: linear-gradient(to right, #AA412F 50%, #AA412F 50%);
   background-size: 7px 1px;
-  background-position: center center;
+  background-position: center left;
   background-repeat: repeat-x; }
 
 .resize.vertical:hover, .resize.vertical.active, .resizing .resize.vertical.active:hover {
   background-image: linear-gradient(to right, #AA412F 50%, transparent 50%); }
 
-/* Since you can overlap other borders, those shouldn't become dotted. */
-/* A higher specificity selector is above to cancel this for the active resize. */
+/* Since you can move your mouse over other borders, those shouldn't become dotted. */
+/* A higher specificity selector is above to cancel this for the active resize block. */
 .resizing .resize.vertical:hover {
   background-image: linear-gradient(to right, #AA412F 50%, #AA412F 50%); }
 
 /* If you move your cursor quickly it'll move outside of the block and change. */
 /* This fixes that behavior. */
-.resizing.width * {
-  cursor: ew-resize; }
+body.dragging {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none; }
 
-.resizing.height * {
-  cursor: ns-resize; }
+body.dragging, body.dragging * {
+  cursor: move !important; }
+
+/* Set up a block. */
+.dragproxy {
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  background: red;
+  z-index: 1000; }
 
 /* The overall container for the application area is a horizontal flexbox with 100% height. */
 .index {
@@ -590,9 +613,6 @@ section.router .front ul {
   margin: 0;
   padding: 0;
   list-style: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
   cursor: default; }
 section.router .front ul ul {
   margin-left: 6.5px; }
