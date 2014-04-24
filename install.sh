@@ -15,3 +15,5 @@ cd ../../
 
 git checkout vendor
 rm .gitkeep
+
+npm link ember-cli

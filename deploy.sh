@@ -3,7 +3,7 @@
 # Make sure we're in a good state.
 git checkout master
 rm -rf dist
-~/repos/ember-cli/bin/ember build production
+ember build production
 
 # Move to the "release" branch and make everything work.
 git checkout gh-pages
