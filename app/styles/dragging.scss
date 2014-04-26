@@ -4,4 +4,4 @@ body.dragging { -moz-user-select: none; -webkit-user-select: none; user-select: 
 body.dragging, body.dragging * { cursor: move !important; }
 
 /* Set up a block. */
-.dragproxy { position: absolute; top: 0; left: 0; -webkit-transform: translateZ(0); -webkit-transform: translate(-100px, -100px); transform: translate(-100px, -100px); background: red; z-index: 1000; }
+.dragproxy { position: absolute; top: 0; left: 0; z-index: 1000; -webkit-transform: translateZ(0); -webkit-transform: translate(-100px, -100px); transform: translate(-1000px, -1000px); }
