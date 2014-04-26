@@ -19,11 +19,22 @@ This is an Ember application which you can use to generate flows for your Ember 
 Building
 --------
 
-```
-npm install -g bower ember-cli
+```sh
+# Bower
+npm install -g bower
+
+# ember-cli
+git clone git@github.com:stefanpenner/ember-cli.git
+cd ember-cli
+git checkout 63e9dd584ff39ea7665b833debd5a49171e4f52e
+npm link
+cd ..
+
+# ember-flows-generator
 git clone git@github.com:nathanhammond/ember-flows-generator.git
 cd ember-flows-generator
 ./install.sh
+ember server
 ```
 
 
