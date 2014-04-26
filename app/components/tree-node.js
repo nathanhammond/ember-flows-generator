@@ -31,6 +31,9 @@ export default Ember.Component.extend({
   },
 
   dragproxy: function() {
+    var minradius = 40;
+    var radiuspadding = 5;
+
     var svgnamespace = 'http://www.w3.org/2000/svg';
     var name = this.get('node.value.name');
     var splits = name.split(/([\.\_\-]{1})/);
@@ -84,6 +87,14 @@ export default Ember.Component.extend({
       var b = absolutemaxheight / 2;
       radius = Math.sqrt(a*a+b*b);
       numrows = 1;
+    }
+
+    if (radius + radiuspadding > minradius) {
+      // Add the padding at the right scale.
+      radius += radiuspadding * radius / minradius;
+    } else {
+      // Enforce the minimum radius.
+      radius = minradius;
     }
 
     // Vertically centering the tspans in the circle means knowing how tall they are.
