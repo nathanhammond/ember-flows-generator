@@ -1,0 +1,6 @@
+section.canvas {
+  svg { width: 100%; height: 100%; }
+
+  /* Workaround for WebKit/Blink height bug: */
+  svg { @include webkitcalc(height, "100% + 13px"); }
+}
