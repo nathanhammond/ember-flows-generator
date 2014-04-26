@@ -505,10 +505,12 @@ body.dragging, body.dragging * {
 /* Set up a block. */
 .dragproxy {
   position: absolute;
-  top: -100px;
-  left: -100px;
-  background: red;
-  z-index: 1000; }
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  -webkit-transform: translateZ(0);
+  -webkit-transform: translate(-100px, -100px);
+  transform: translate(-1000px, -1000px); }
 
 /* The overall container for the application area is a horizontal flexbox with 100% height. */
 .index {
@@ -620,6 +622,14 @@ section.router .front li.focused {
   font-weight: bold; }
 section.router .front li.focused ul {
   font-weight: normal; }
+
+section.canvas {
+  /* Workaround for WebKit/Blink height bug: */ }
+  section.canvas svg {
+    width: 100%;
+    height: 100%; }
+  section.canvas svg {
+    height: -webkit-calc(100% + 13px); }
 
 section.state .card {
   height: 100%; }
@@ -962,4 +972,4 @@ section.canvas .body {
   transition: box-shadow 0.1s; }
 
 .dragging section.canvas .body {
-  box-shadow: inset 0 0 5px #AA412F; }
+  box-shadow: inset 0 0 6.5px #AA412F; }
