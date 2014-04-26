@@ -37,7 +37,12 @@ export default Ember.Component.extend({
     var svgnamespace = 'http://www.w3.org/2000/svg';
     var name = this.get('node.value.name');
     var splits = name.split(/([\.\_\-]{1})/);
-    splits = splits.map(function(item) { return '<tspan style="text-anchor: middle;">' + item + "</tspan>"; });
+    var tspans = splits.map(function(split) {
+      var tspan = document.createElementNS(svgnamespace, 'tspan');
+      tspan.style.textAnchor = "middle";
+      tspan.innerHTML = split;
+      return tspan;
+    });
 
     var dragproxy = document.createElementNS(svgnamespace, "svg");
     dragproxy.setAttribute("version", "1.1");
@@ -47,10 +52,9 @@ export default Ember.Component.extend({
     circle.setAttribute('fill', 'green');
 
     var text = document.createElementNS(svgnamespace, 'text');
-    text.innerHTML = splits.join('');
-
-    // Much easier than instantiating them individually. :)
-    var tspans = [].slice.call(text.getElementsByTagName('tspan'));
+    tspans.forEach(function(tspan) {
+      text.appendChild(tspan);
+    });
 
     dragproxy.appendChild(circle);
     dragproxy.appendChild(text);
@@ -67,6 +71,9 @@ export default Ember.Component.extend({
     }, absolutemaxwidth);
 
     var baselineshift = this.getBaselineRatio() * absoluteminheight;
+
+    // Workaround for Firefox bug https://bugzilla.mozilla.org/show_bug.cgi?id=1001804
+    if (/firefox/i.test(navigator.userAgent)) { baselineshift = 0; }
 
     var radius, numrows;
     if (tspans.length === 1) {
