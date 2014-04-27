@@ -16,6 +16,8 @@ function permute(splits, depth, windowsize) {
   if (results.length === 1 && depth !== 0) {
     results = results[0];
   }
+
+  // FIXME: Guarantee unique values.
   return results;
 }
 
