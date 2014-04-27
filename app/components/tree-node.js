@@ -152,6 +152,8 @@ export default Ember.Component.extend({
 
     var permutations = permute(tspans);
     var radius, numrows, solution;
+
+    // FIXME: I believe that there are bugs for larger permutation sets.
     permutations.forEach(function(permutation) {
       var radii = [];
       var rows = permutation.length;
