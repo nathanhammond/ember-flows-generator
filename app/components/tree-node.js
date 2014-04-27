@@ -45,19 +45,22 @@ var permute = (function() {
       if (offset + windowsize < splits.length) { result.after = permute(splits.slice(offset + windowsize), depth + 1); }
 
       // Flatten the results.
-      var beforeoption, afteroption;
       if (result.before.length && result.after.length) {
-        for (beforeoption = 0; beforeoption < result.before.length; beforeoption++) {
-          for (afteroption = 0; afteroption < result.before.length; afteroption++) {
+        for (var beforeoption in result.before) {
+          if (!result.before.hasOwnProperty(beforeoption)) { continue; }
+          for (var afteroption in result.after) {
+            if (!result.after.hasOwnProperty(afteroption)) { continue; }
             results.push([].concat(result.before[beforeoption], result.current, result.after[afteroption]));
           }
         }
       } else if (result.before.length) {
-        for (beforeoption = 0; beforeoption < result.before.length; beforeoption++) {
+        for (var beforeoption in result.before) {
+          if (!result.before.hasOwnProperty(beforeoption)) { continue; }
           results.push([].concat(result.before[beforeoption], result.current));
         }
       } else if (result.after.length) {
-        for (afteroption = 0; afteroption < result.before.length; afteroption++) {
+        for (var afteroption in result.after) {
+          if (!result.after.hasOwnProperty(afteroption)) { continue; }
           results.push([].concat(result.current, result.after[afteroption]));
         }
       } else {
