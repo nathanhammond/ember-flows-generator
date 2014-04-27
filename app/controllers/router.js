@@ -55,7 +55,7 @@ function arrayizeChildren(routeTree) {
 
 export default Ember.Controller.extend({
   flipped: false,
-  code: "var Router = Ember.Router.extend({\n  rootURL: ENV.rootURL,\n  location: 'auto'\n});\n\nRouter.map(function() {\n  this.route('asdf');\n});\n\nexport default Router;",
+  code: "var Router = Ember.Router.extend({\n  rootURL: ENV.rootURL,\n  location: 'auto'\n});\n\nRouter.map(function() {\n  this.resource('asdf', function() {});\n});\n\nexport default Router;",
 
   changeCount: 0,
 
