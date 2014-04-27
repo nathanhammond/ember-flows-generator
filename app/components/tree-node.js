@@ -45,18 +45,19 @@ var permute = (function() {
       if (offset + windowsize < splits.length) { result.after = permute(splits.slice(offset + windowsize), depth + 1); }
 
       // Flatten the results.
+      var beforeoption, afteroption;
       if (result.before.length && result.after.length) {
-        for (var beforeoption in result.before) {
-          for (var afteroption in result.after) {
+        for (beforeoption = 0; beforeoption < result.before.length; beforeoption++) {
+          for (afteroption = 0; afteroption < result.before.length; afteroption++) {
             results.push([].concat(result.before[beforeoption], result.current, result.after[afteroption]));
           }
         }
       } else if (result.before.length) {
-        for (var beforeoption in result.before) {
+        for (beforeoption = 0; beforeoption < result.before.length; beforeoption++) {
           results.push([].concat(result.before[beforeoption], result.current));
         }
       } else if (result.after.length) {
-        for (var afteroption in result.after) {
+        for (afteroption = 0; afteroption < result.before.length; afteroption++) {
           results.push([].concat(result.current, result.after[afteroption]));
         }
       } else {
@@ -153,7 +154,6 @@ export default Ember.Component.extend({
     var permutations = permute(tspans);
     var radius, numrows, solution;
 
-    // FIXME: I believe that there are bugs for larger permutation sets.
     permutations.forEach(function(permutation) {
       var radii = [];
       var rows = permutation.length;
@@ -192,7 +192,26 @@ export default Ember.Component.extend({
       }
     });
 
-    // TODO: Process the solution and merge the tspans.
+    // Process the solution and merge the tspans.
+    tspans.forEach(function(tspan) {
+      text.removeChild(tspan);
+    });
+
+    for (var row = 0; row < numrows; row++) {
+      if (solution[row] instanceof Array) {
+        splits.splice(row, row + solution[row].length, splits.slice(row, row + solution[row].length).join(''));
+      }
+    }
+
+    var tspans = splits.map(function(split) {
+      var tspan = document.createElementNS(svgnamespace, 'tspan');
+      tspan.style.textAnchor = "middle";
+      tspan.innerHTML = split;
+      return tspan;
+    });
+    tspans.forEach(function(tspan) {
+      text.appendChild(tspan);
+    });
 
     if (radius + radiuspadding > minradius) {
       // Add the padding at the right scale.
