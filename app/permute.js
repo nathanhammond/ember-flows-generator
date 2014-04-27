@@ -38,7 +38,7 @@ function process(splits, depth, windowsize) {
     if (offset !== 0) { result.before = permute(splits.slice(0, offset), depth + 1); }
 
     // Save the current sliding window every time.
-    result.current = [ splits.slice(offset, offset + windowsize).join('') ];
+    result.current = [ splits.slice(offset, offset + windowsize) ];
 
     // If there is space after the sliding window, permute it.
     if (offset + windowsize < splits.length) { result.after = permute(splits.slice(offset + windowsize), depth + 1); }
