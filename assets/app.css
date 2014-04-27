@@ -508,8 +508,8 @@ body.dragging, body.dragging * {
   top: 0;
   left: 0;
   z-index: 1000;
-  -webkit-transform: translateZ(0);
-  -webkit-transform: translate(-100px, -100px);
+  -webkit-transform: translate(-1000px, -1000px);
+  -moz-transform: translate(-1000px, -1000px);
   transform: translate(-1000px, -1000px); }
 
 /* The overall container for the application area is a horizontal flexbox with 100% height. */
