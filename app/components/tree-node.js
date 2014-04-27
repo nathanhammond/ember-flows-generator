@@ -143,11 +143,12 @@ export default Ember.Component.extend({
     document.body.appendChild(dragproxy);
 
     /* Now that it's real, let's do some calculations on it to lay it out correctly. */
-    var tspanheight = tspans[0].getBoundingClientRect().height;
+    /* Use the text element to work around: https://bugzilla.mozilla.org/show_bug.cgi?id=1002044 */
+    var tspanheight = text.getBoundingClientRect().height;
     var baselineshift = this.getBaselineRatio() * tspanheight;
 
     // Workaround for Firefox bug https://bugzilla.mozilla.org/show_bug.cgi?id=1001804
-    if (/firefox/i.test(navigator.userAgent)) { baselineshift = 0; }
+    // if (/firefox/i.test(navigator.userAgent)) { baselineshift = 0; }
 
     var permutations = permute(tspans);
     var radius, numrows, solution;
@@ -168,13 +169,14 @@ export default Ember.Component.extend({
           b = permutation[row].reduce(function(previous, tspan) {
             /* Chrome has a bug where it can't accurately get SVG width using getBoundingClientRect(). */
             /* Firefox returns undefined for offsetWidth on SVG elements. */
+            /* Firefox SVG tspan size is off by devicePixelRatio? https://bugzilla.mozilla.org/show_bug.cgi?id=1002044 */
             /* When these powers combine: */
-            var width = tspan.offsetWidth || tspan.getBoundingClientRect().width;
+            var width = tspan.offsetWidth || tspan.getBoundingClientRect().width * window.devicePixelRatio;
             return width + previous;
           }, 0) / 2;
         } else {
           tspan = permutation[row];
-          b = (tspan.offsetWidth || tspan.getBoundingClientRect().width) / 2;
+          b = (tspan.offsetWidth || tspan.getBoundingClientRect().width * window.devicePixelRatio) / 2;
         }
 
         radii.push(Math.sqrt(a*a+b*b));
