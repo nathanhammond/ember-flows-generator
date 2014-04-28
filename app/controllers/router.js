@@ -75,7 +75,11 @@ export default Ember.Controller.extend({
       return e;
     }
 
-    var routeNames = router.create().router.recognizer.names;
+    /* WORKAROUND: https://github.com/emberjs/ember.js/pull/4779 */
+    var container = new Ember.Container();
+    container.register('location:auto', Ember.Object);
+
+    var routeNames = router.create({ container: container }).router.recognizer.names;
     var routeTree = {};
     var route = undefined;
 
