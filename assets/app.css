@@ -331,6 +331,9 @@ html, body {
   overflow: hidden; }
 
 /* Card positioning. */
+.card {
+  position: relative; }
+
 .card .side {
   position: absolute;
   top: 0;
@@ -362,12 +365,28 @@ html, body {
   backface-visibility: hidden; }
 
 .card .back {
+  /* WORKAROUND: https://code.google.com/p/chromium/issues/detail?id=359657. */
   -webkit-transform: matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1);
-  transform: matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1); }
+  transform: matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1);
+  /* WORKAROUND: IE has no idea what it's doing when it sees a full matrix. */
+  -ms-transform: rotateY(180deg); }
 
 .flipped .card {
+  /* WORKAROUND: https://code.google.com/p/chromium/issues/detail?id=359657. */
   -webkit-transform: matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1);
-  transform: matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1); }
+  transform: matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1);
+  /* WORKAROUND: IE has no idea what it's doing when it sees a full matrix. */
+  -ms-transform: rotateY(180deg); }
+
+/* WORKAROUND: IE doesn't support preserve-3d. */
+.card {
+  -ms-transition: transform 0s; }
+
+.flipped .card .front {
+  -ms-backface-visibility: hidden; }
+
+.flipped .card .back {
+  -ms-backface-visibility: visible; }
 
 /* This is the mostly decorative header. */
 header.main {
