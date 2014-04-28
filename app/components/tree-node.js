@@ -202,7 +202,7 @@ export default Ember.Component.extend({
 
     for (var row = 0; row < numrows; row++) {
       if (solution[row] instanceof Array) {
-        splits.splice(row, row + solution[row].length, splits.slice(row, row + solution[row].length).join(''));
+        splits.splice(row, solution[row].length, splits.slice(row, row + solution[row].length).join(''));
       }
     }
 
