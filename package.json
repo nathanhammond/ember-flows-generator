@@ -22,7 +22,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "ember-cli" : "0.0.23",
+    "ember-cli" : "git://github.com/stefanpenner/ember-cli.git#63e9dd584ff39ea7665b833debd5a49171e4f52e",
     "originate": "~0.1.5",
     "broccoli-template": "~0.1.1",
     "broccoli-sass": "^0.1.3",
