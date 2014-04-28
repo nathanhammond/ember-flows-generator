@@ -61,6 +61,11 @@ html, body { height: 100%; overflow: hidden; }
   -ms-transform: rotateY(180deg);
 }
 
+/* WORKAROUND: IE doesn't support preserve-3d. */
+.card { -ms-transition: transform 0s; }
+.flipped .card .front { -ms-backface-visibility: hidden; }
+.flipped .card .back { -ms-backface-visibility: visible; }
+
 /* This is the mostly decorative header. */
 header.main { height: 40px; padding: 0 13px; background: #e1563f url('../img/navigation_background_x2.png') center top repeat-x; background-size: 320px 40px; border-bottom: 1px solid #aa412f; box-shadow: rgba(0,0,0,0.3) 0 0 2px; }
 header.main {
