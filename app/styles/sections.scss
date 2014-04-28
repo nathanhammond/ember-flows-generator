@@ -1,3 +1,6 @@
+/* When not a pane. */
+.application > section { height: 100%; }
+
 /* Each pane */
 section { position: relative; min-height: 20px; }
 
