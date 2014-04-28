@@ -108,8 +108,9 @@ export default Ember.Component.extend({
   },
 
   dragproxy: function() {
-    var minradius = 40;
+    var minradius = 30;
     var radiuspadding = 5;
+    var defaultcombinedradius = minradius + radiuspadding;
 
     var svgnamespace = 'http://www.w3.org/2000/svg';
     var name = this.get('node.value.name');
@@ -216,25 +217,29 @@ export default Ember.Component.extend({
       text.appendChild(tspan);
     });
 
-    if (radius + radiuspadding > minradius) {
-      // Add the padding at the right scale.
-      radius += radiuspadding * radius / minradius;
-    } else {
-      // Enforce the minimum radius.
+    // Enforce the minimum radius.
+    if (radius < minradius) {
       radius = minradius;
     }
 
-    // Vertically centering the tspans in the circle means knowing how tall they are.
-    var topspace = ((radius * 2) - (numrows * tspanheight))/2;
+    // Add the padding at the right scale.
+    if (radius > minradius) {
+      radiuspadding = radiuspadding * radius / minradius;
+    }
 
-    circle.setAttribute('cx', radius);
-    circle.setAttribute('cy', radius);
-    circle.setAttribute('r', radius);
+    var combinedradius = radius + radiuspadding;
+
+    // Vertically centering the tspans in the circle means knowing how tall they are.
+    var topspace = ((combinedradius * 2) - (numrows * tspanheight))/2;
+
+    circle.setAttribute('cx', combinedradius);
+    circle.setAttribute('cy', combinedradius);
+    circle.setAttribute('r', combinedradius);
     text.setAttribute('x', 0);
     text.setAttribute('y', topspace + tspanheight - baselineshift);
 
     tspans.forEach(function(tspan, index) {
-      tspan.setAttribute('x', radius);
+      tspan.setAttribute('x', combinedradius);
       if (index) {
         tspan.setAttribute('dy', tspanheight);
       }
@@ -242,8 +247,9 @@ export default Ember.Component.extend({
 
     document.body.removeChild(dragproxy);
 
-    dragproxy.setAttribute('width', (radius*2)+'px');
-    dragproxy.setAttribute('height', (radius*2)+'px')
+    dragproxy.setAttribute('width', defaultcombinedradius*2+'px');
+    dragproxy.setAttribute('height', defaultcombinedradius*2+'px');
+    dragproxy.setAttribute('viewBox', '0 0 '+combinedradius*2+' '+combinedradius*2);
     return dragproxy;
   }.property(),
 
