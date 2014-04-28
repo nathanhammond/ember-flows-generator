@@ -570,6 +570,10 @@ body.dragging, body.dragging * {
   .index .resize.horizontal {
     height: calc(100% - 40px); }
 
+/* When not a pane. */
+.application > section {
+  height: 100%; }
+
 /* Each pane */
 section {
   position: relative;
