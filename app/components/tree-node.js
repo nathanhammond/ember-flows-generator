@@ -134,7 +134,7 @@ export default Ember.Component.extend({
     var tspans = splits.map(function(split) {
       var tspan = document.createElementNS(svgnamespace, 'tspan');
       tspan.style.textAnchor = "middle";
-      tspan.innerHTML = split;
+      tspan.appendChild(document.createTextNode(split));
       return tspan;
     });
     tspans.forEach(function(tspan) {
@@ -209,7 +209,7 @@ export default Ember.Component.extend({
     var tspans = splits.map(function(split) {
       var tspan = document.createElementNS(svgnamespace, 'tspan');
       tspan.style.textAnchor = "middle";
-      tspan.innerHTML = split;
+      tspan.appendChild(document.createTextNode(split));
       return tspan;
     });
     tspans.forEach(function(tspan) {
