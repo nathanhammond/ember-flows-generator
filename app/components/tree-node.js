@@ -127,6 +127,9 @@ export default Ember.Component.extend({
     dragproxy.setAttribute("version", "1.1");
     dragproxy.setAttribute('class', 'dragproxy');
 
+    var g = document.createElementNS(svgnamespace, 'g');
+    g.setAttribute('id', 'route-'+btoa(name).replace("=","-"));
+
     var circle = document.createElementNS(svgnamespace, 'circle');
     circle.setAttribute('fill', 'green');
 
@@ -142,8 +145,9 @@ export default Ember.Component.extend({
       text.appendChild(tspan);
     });
 
-    dragproxy.appendChild(circle);
-    dragproxy.appendChild(text);
+    dragproxy.appendChild(g);
+    g.appendChild(circle);
+    g.appendChild(text);
 
     document.body.appendChild(dragproxy);
 
