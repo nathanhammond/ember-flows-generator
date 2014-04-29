@@ -20,7 +20,4 @@ section {
   .body { position: absolute; top: 20px; right: 0; bottom: 0; left: 0; overflow: auto; padding: 6.5px; }
   .body.card { overflow: visible; padding: 0; }
   .body.card .side { padding: 6.5px; height: calc(100% - 20px); }
-
-  /* Workaround for Firefox layout bug. box-sizing doesn't play nicely. Works in Firefox 30. */
-  .body.card .side { @include mozcalc(width, "100% - 13px"); @include mozcalc(height, "100% - 33px"); }
 }

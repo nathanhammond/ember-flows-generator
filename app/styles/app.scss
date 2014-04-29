@@ -4,9 +4,6 @@
 @mixin webkitcalc($property, $expression) {
   #{$property}: -webkit-calc(#{$expression});
 }
-@mixin mozcalc($property, $expression) {
-  #{$property}: -moz-calc(#{$expression});
-}
 
 $font-family: Helvetica, Arial, sans-serif;
 $color: #FAF2EE;
