@@ -612,25 +612,20 @@ section > header .card {
   float: right;
   width: 40px; }
 
-section {
-  /* Workaround for Firefox layout bug. box-sizing doesn't play nicely. Works in Firefox 30. */ }
-  section .body {
-    position: absolute;
-    top: 20px;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    overflow: auto;
-    padding: 6.5px; }
-  section .body.card {
-    overflow: visible;
-    padding: 0; }
-  section .body.card .side {
-    padding: 6.5px;
-    height: calc(100% - 20px); }
-  section .body.card .side {
-    width: -moz-calc(100% - 13px);
-    height: -moz-calc(100% - 33px); }
+section .body {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  padding: 6.5px; }
+section .body.card {
+  overflow: visible;
+  padding: 0; }
+section .body.card .side {
+  padding: 6.5px;
+  height: calc(100% - 20px); }
 
 section.router .card {
   height: 100%; }
