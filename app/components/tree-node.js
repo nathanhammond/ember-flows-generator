@@ -311,7 +311,7 @@ export default Ember.Component.extend({
         e.pageX >= dims.left && e.pageX <= dims.right &&
         e.pageY >= dims.top && e.pageY <= dims.bottom
       ) {
-        var translatewrapper = document.createElementNS(svgnamespace, 'g');
+        var translatewrapper = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 
         translatewrapper.appendChild(elem);
         var transform = 'translate('+(e.pageX-dims.left-35)+' '+(e.pageY-dims.top-35)+')';
