@@ -253,7 +253,7 @@ export default Ember.Component.extend({
 
     dragproxy.setAttribute('width', defaultcombinedradius*2+'px');
     dragproxy.setAttribute('height', defaultcombinedradius*2+'px');
-    dragproxy.setAttribute('viewBox', '0 0 '+combinedradius*2+' '+combinedradius*2);
+    g.setAttribute('transform','scale('+defaultcombinedradius/combinedradius+')');
     return dragproxy;
   }.property(),
 
