@@ -299,6 +299,26 @@ export default Ember.Component.extend({
       document.body.removeEventListener('mouseup', mouseUpHandler);
       document.body.classList.remove('dragging');
 
+      // FIXME: Breaking all sorts of encapsulation here.
+      // This gets cleaned up the moment that it works.
+
+      var droptarget = $('.canvas svg')[0];
+      var dims = droptarget.getBoundingClientRect();
+      var elem = dragproxy.getElementsByTagName('g')[0];
+
+      // If the mouseup occurs at a location that is above the canvas.
+      if (
+        e.pageX >= dims.left && e.pageX <= dims.right &&
+        e.pageY >= dims.top && e.pageY <= dims.bottom
+      ) {
+        var translatewrapper = document.createElementNS(svgnamespace, 'g');
+
+        translatewrapper.appendChild(elem);
+        var transform = 'translate('+(e.pageX-dims.left-35)+' '+(e.pageY-dims.top-35)+')';
+        translatewrapper.setAttribute('transform', transform);
+
+        droptarget.appendChild(translatewrapper);
+      }
 
       // Clean up
       document.body.removeChild(dragproxy);
